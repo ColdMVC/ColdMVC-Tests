@@ -1,0 +1,81 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+								   "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class entity-name="City" lazy="true" name="cfc:app.model.City" table="City">
+		<id name="id" type="int">
+			<column length="10" name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="name" type="string">
+			<column name="Name" />
+		</property>
+		<bag name="teams">
+			<key column="City_ID" />
+			<one-to-many class="cfc:app.model.Team" />
+		</bag>
+	</class>
+	<class entity-name="Manager" lazy="true" name="cfc:app.model.Manager" table="Manager">
+		<id name="id" type="int">
+			<column length="10" name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="firstName" type="string">
+			<column name="First_Name" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="Last_Name" />
+		</property>
+		<one-to-one class="cfc:app.model.Team" name="team" property-ref="manager" />
+	</class>
+	<class entity-name="Player" lazy="true" name="cfc:app.model.Player" table="Player">
+		<id name="id" type="int">
+			<column length="10" name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="firstName" type="string">
+			<column name="First_Name" />
+		</property>
+		<property name="lastName" type="string">
+			<column name="Last_Name" />
+		</property>
+		<many-to-one class="cfc:app.model.Team" column="Team_ID" name="team" />
+		<bag cascade="all" lazy="true" name="positions" table="Player_Position">
+			<key column="Player_ID" />
+			<many-to-many class="cfc:app.model.Position" column="Position_ID" />
+		</bag>
+	</class>
+	<class entity-name="Position" lazy="true" name="cfc:app.model.Position" table="Position">
+		<id name="id" type="int">
+			<column length="10" name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="name" type="string">
+			<column name="Name" />
+		</property>
+		<property name="abbreviation" type="string">
+			<column name="Abbreviation" />
+		</property>
+		<bag cascade="all" lazy="true" name="players" table="Player_Position">
+			<key column="Position_ID" />
+			<many-to-many class="cfc:app.model.Player" column="Player_ID" />
+		</bag>
+	</class>
+	<class entity-name="Team" lazy="true" name="cfc:app.model.Team" table="Team">
+		<id name="id" type="int">
+			<column length="10" name="ID" />
+			<generator class="native" />
+		</id>
+		<property name="name" type="string">
+			<column name="Name" />
+		</property>
+		<property name="abbreviation" type="string">
+			<column name="Abbreviation" />
+		</property>
+		<bag name="players">
+			<key column="Player_ID" />
+			<one-to-many class="cfc:app.model.Player" />
+		</bag>
+		<many-to-one class="cfc:app.model.Manager" column="Manager_ID" name="manager" unique="true" />
+		<many-to-one class="cfc:app.model.City" column="City_ID" name="city" />
+	</class>
+</hibernate-mapping>
