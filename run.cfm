@@ -1,4 +1,4 @@
-<cfif structKeyExists(variables, "test")>
+<cfif structKeyExists(variables, "test") and variables.test neq "">
 
 	<cfset test = createObject("component", "test." & test) />
 

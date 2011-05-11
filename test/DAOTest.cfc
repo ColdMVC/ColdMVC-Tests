@@ -39,10 +39,45 @@ component {
 
 	}
 
+	function testModelPropOneToOneNull() {
+
+		var manager = _Manager.new();
+		var team = manager.getTeam();
+
+		assertTrue(isNull(team));
+
+		team = manager.prop("team");
+
+		assertTrue(isInstanceOf(team, "app.model.Team"));
+		assertFalse(team.exists());
+
+		team = manager.getTeam();
+
+		assertTrue(isInstanceOf(team, "app.model.Team"));
+
+	}
+
 	function testModelPropOneToOneEmpty() {
 
 		var manager = _Manager.new();
-		var team = manager.prop("team");
+		manager.prop("team", "");
+
+		var team = manager.getTeam();
+
+		assertTrue(isNull(team));
+
+		manager.prop("team", 1);
+		team = manager.getTeam();
+
+		assertTrue(isInstanceOf(team, "app.model.Team"));
+		assertTrue(team.exists());
+
+		manager.prop("team", "");
+		team = manager.getTeam();
+
+		assertTrue(isNull(team));
+
+		team = manager.prop("team");
 
 		assertTrue(isInstanceOf(team, "app.model.Team"));
 		assertFalse(team.exists());
@@ -59,10 +94,45 @@ component {
 
 	}
 
+	function testModelPropManyToOneNull() {
+
+		var team = _Team.new();
+		var city = team.getCity();
+
+		assertTrue(isNull(city));
+
+		city = team.prop("city");
+
+		assertTrue(isInstanceOf(city, "app.model.City"));
+		assertFalse(city.exists());
+
+		city = team.getCity();
+
+		assertTrue(isInstanceOf(city, "app.model.City"));
+
+	}
+
 	function testModelPropManyToOneEmpty() {
 
 		var team = _Team.new();
-		var city = team.prop("city");
+		team.prop("city", "");
+
+		var city = team.getCity();
+
+		assertTrue(isNull(city));
+
+		team.prop("city", 1);
+		city = team.getCity();
+
+		assertTrue(isInstanceOf(city, "app.model.City"));
+		assertTrue(city.exists());
+
+		team.prop("city", "");
+		city = team.getCity();
+
+		assertTrue(isNull(city));
+
+		city = team.prop("city");
 
 		assertTrue(isInstanceOf(city, "app.model.City"));
 		assertFalse(city.exists());
@@ -99,10 +169,35 @@ component {
 
 	}
 
-	function testModelPropOneToManyEmpty() {
+	function testModelPropOneToManyNull() {
 
 		var city = _City.new();
 		var teams = city.prop("teams");
+
+		assertEquals(arrayLen(teams), 0);
+
+		teams = city.getTeams();
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	function testModelPropOneToManyEmpty() {
+
+		var city = _City.new();
+		city.prop("teams", "");
+
+		var teams = city.getTeams();
+
+		assertEquals(arrayLen(teams), 0);
+
+		city.prop("teams", [ 3, 1, 2 ]);
+		teams = city.getTeams();
+
+		assertEquals(arrayLen(teams), 3);
+
+		city.prop("teams", "");
+		teams = city.getTeams();
 
 		assertEquals(arrayLen(teams), 0);
 
@@ -136,10 +231,35 @@ component {
 
 	}
 
-	function testModelPropManyToManyEmpty() {
+	function testModelPropManyToManyNull() {
 
 		var player = _Player.new();
 		var positions = player.prop("positions");
+
+		assertEquals(arrayLen(positions), 0);
+
+		positions = player.getPositions();
+
+		assertEquals(arrayLen(positions), 0);
+
+	}
+
+	function testModelPropManyToManyEmpty() {
+
+		var player = _Player.new();
+		player.prop("positions", "");
+
+		var positions = player.getPositions();
+
+		assertEquals(arrayLen(positions), 0);
+
+		player.prop("positions", [ 3, 1, 2 ]);
+		positions = player.getPositions();
+
+		assertEquals(arrayLen(positions), 3);
+
+		player.prop("positions", "");
+		positions = player.getPositions();
 
 		assertEquals(arrayLen(positions), 0);
 

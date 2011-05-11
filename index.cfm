@@ -1,3 +1,3 @@
-<cfset test = "app.util.IniTest" />
+<cfset test = "" />
 
 <cfinclude template="run.cfm" />
