@@ -19,6 +19,222 @@ component {
 
 	}
 
+	function testQueryHQL() {
+
+		var q = _Team.createQuery();
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team");
+
+	}
+
+	function testQueryEq() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.eq("name", "Red Sox")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team where team.name = :name");
+
+	}
+
+	function testQueryStartsWith() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.startsWith("name", "Red Sox")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team where team.name like :name");
+
+	}
+
+	function testQueryLike() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.like("name", "Sox")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team where team.name like :name");
+
+	}
+
+	function testQueryIsNotNull() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.isNotNull("name")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team where team.name is not null");
+
+	}
+
+	function testQueryAndSimple() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.and(
+				q.eq("name", "Red Sox"),
+				q.eq("abbreviation", "BOS")
+			)
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team where ( team.name = :name and team.abbreviation = :abbreviation )");
+
+	}
+
+	function testQueryOrSimple() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.or(
+				q.eq("name", "Red Sox"),
+				q.eq("name", "Yankees")
+			)
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team where ( team.name = :name or team.name = :name_2 )");
+
+	}
+
+	function testQueryGet() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.or(
+				q.eq("name", "Red Sox"),
+				q.eq("abbreviation", "BOS")
+			)
+		);
+
+		var team = q.get();
+
+		assertTrue(team.exists());
+		assertEquals(team.id(), 3);
+		assertEqualsCase(team.name(), "Red Sox");
+
+	}
+
+	function testQueryList() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.or(
+				q.eq("name", "Cubs"),
+				q.like("name", "Sox")
+			)
+		)
+		.sort("name")
+		.order("asc");
+
+		var hql = q.getHQL();
+		var teams = q.list();
+
+		assertEqualsCase(hql, "select team from Team team where ( team.name = :name or team.name like :name_2 )");
+		assertEquals(arrayLen(teams), 3);
+		assertEqualsCase(teams[1].name(), "Cubs");
+		assertEqualsCase(teams[2].name(), "Red Sox");
+		assertEqualsCase(teams[3].name(), "White Sox");
+
+	}
+
+	function testQueryJoin() {
+
+		var q = _Team.createQuery();
+		q.join("city");
+		q.where(
+			q.eq("city.name", "Boston")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team team join team.city as city where city.name = :name");
+
+	}
+
+	function testQueryNestedOrs() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.or(
+				q.or(
+					q.like("name", "Red"),
+					q.like("name", "White")
+				),
+				q.or(
+					q.startsWith("abbreviation", "NY")
+				)
+			)
+		)
+		.sort("name")
+		.order("asc");
+
+		var hql = q.getHQL();
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 4);
+		assertEqualsCase(teams[1].name(), "Mets");
+		assertEqualsCase(teams[2].name(), "Red Sox");
+		assertEqualsCase(teams[3].name(), "White Sox");
+		assertEqualsCase(teams[4].name(), "Yankees");
+
+	}
+
+	function testQueryNestedAndsAndOrs() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.and(
+				q.or(
+					q.and(
+						q.like("name", "Sox"),
+						q.or(
+							q.startsWith("name", "R"),
+							q.isNull("name")
+						)
+					),
+					q.or(
+						q.eq("abbreviation", "COL")
+					),
+					q.or(
+						q.eq("name", "Mets")
+					)
+				),
+				q.neq("name", "Rockies")
+			)
+
+		)
+		.orWhere(
+			q.eq("name", "Cubs")
+		)
+		.sort("name")
+		.order("asc");
+
+		var hql = q.getHQL();
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 3);
+		assertEqualsCase(teams[1].name(), "Cubs");
+		assertEqualsCase(teams[2].name(), "Mets");
+		assertEqualsCase(teams[3].name(), "Red Sox");
+
+	}
+
 	function testModelMissingMethodSimple() {
 
 		var team = _Team.new();
@@ -388,8 +604,8 @@ component {
 
 		assertEquals(arrayLen(teams), 3);
 		assertEqualsCase(teams[1].name(), "White Sox");
-		assertEqualsCase(teams[2].name(), "Red Sox");
-		assertEqualsCase(teams[3].name(), "Mets");
+		assertEqualsCase(teams[2].name(), "Rockies");
+		assertEqualsCase(teams[3].name(), "Red Sox");
 
 	}
 
@@ -399,7 +615,7 @@ component {
 			offset = 1
 		});
 
-		assertEquals(arrayLen(teams), 5);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -409,7 +625,7 @@ component {
 			offset = -1
 		});
 
-		assertEquals(arrayLen(teams), 5);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -429,7 +645,7 @@ component {
 			offset = 0
 		});
 
-		assertEquals(arrayLen(teams), 5);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -459,7 +675,7 @@ component {
 			max = 8
 		});
 
-		assertEquals(arrayLen(teams), 5);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -537,11 +753,19 @@ component {
 
 	}
 
-	function testCountByRelationshipSingleWithIsNullOperator() {
+	function testCountByRelationshipSingleValidWithIsNullOperator() {
 
 		var teams = _Team.countByCityOrCityIsNull(1);
 
-		assertEquals(teams, 1);
+		assertEquals(teams, 2);
+
+	}
+
+	public function testCountByRelationshipSingleInValidWithIsNullOperator() {
+
+		var teams = _Team.countByManagerOrManagerIsNull(1);
+
+		assertEquals(teams, 2);
 
 	}
 
@@ -549,7 +773,7 @@ component {
 
 		var teams = _Team.countByCityIsNullOrCity(1);
 
-		assertEquals(teams, 1);
+		assertEquals(teams, 2);
 
 	}
 
@@ -679,7 +903,7 @@ component {
 
 		var teams = _Team.findAllByNameIsNotNull();
 
-		assertEquals(arrayLen(teams), 5);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -695,7 +919,7 @@ component {
 
 		var teams = _Team.findAllByNameIsNotNullOrNameLike("Sox");
 
-		assertEquals(arrayLen(teams), 5);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 

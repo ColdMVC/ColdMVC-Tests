@@ -24,6 +24,7 @@ component {
 			var ozzieGuillen = _Manager.findWhere({firstName = "Ozzie", lastName = "Guillen"}).populate({firstName = "Ozzie", lastName = "Guillen"});
 			var terryCollins = _Manager.findWhere({firstName = "Terry", lastName = "Collins"}).populate({firstName = "Terry", lastName = "Collins"});
 			var terryFrancona = _Manager.findWhere({firstName = "Terry", lastName = "Francona"}).populate({firstName = "Terry", lastName = "Francona"});
+			var joeTorre = _Manager.findWhere({firstName = "Joe", lastName = "Torre"}).populate({firstName = "Joe", lastName = "Torre"});
 
 			var startingPitcher = _Position.findWhere({abbreviation = "SP"}).populate({name = "Starting Pitcher", abbreviation = "SP"});
 			var reliefPitcher = _Position.findWhere({abbreviation = "RP"}).populate({name = "Relief Pitcher", abbreviation = "RP"});
@@ -74,6 +75,7 @@ component {
 			ozzieGuillen.save(false);
 			terryCollins.save(false);
 			terryFrancona.save(false);
+			joeTorre.save(false);
 
 			cubs.save(false);
 			mets.save(false);
