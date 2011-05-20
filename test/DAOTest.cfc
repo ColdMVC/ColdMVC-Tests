@@ -537,6 +537,22 @@ component {
 
 	}
 
+	function testCountByRelationshipSingleWithIsNullOperator() {
+
+		var teams = _Team.countByCityOrCityIsNull(1);
+
+		assertEquals(teams, 1);
+
+	}
+
+	function testCountByRelationshipSingleWithIsNullSecondOperator() {
+
+		var teams = _Team.countByCityIsNullOrCity(1);
+
+		assertEquals(teams, 1);
+
+	}
+
 	function testCountByRelationshipMultiple() {
 
 		var teams = _Team.countByCity(2);
@@ -590,6 +606,34 @@ component {
 
 	}
 
+	function testFindBySimpleIsNull() {
+
+		var team = _Team.findByNameIsNull();
+
+		assertFalse(team.exists());
+
+	}
+
+	function testFindBySimpleIsNotNullWithAnd() {
+
+		var team = _Team.findByNameIsNotNullAndNameLike("Red");
+
+		assertTrue(team.exists());
+		assertEquals(team.id(), 3);
+		assertEqualsCase(team.name(), "Red Sox");
+
+	}
+
+	function testFindBySimpleIsNullWithOr() {
+
+		var team = _Team.findByNameIsNullOrNameLike("Red");
+
+		assertTrue(team.exists());
+		assertEquals(team.id(), 3);
+		assertEqualsCase(team.name(), "Red Sox");
+
+	}
+
 	function testFindBySimpleNone() {
 
 		var team = _Team.findByName("Twins");
@@ -604,6 +648,54 @@ component {
 		var teams = _Team.findAllByName("Yankees");
 
 		assertEquals(arrayLen(teams), 1);
+
+	}
+
+	function testFindAllBySimpleIsNull() {
+
+		var teams = _Team.findAllByNameIsNull();
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	function testFindAllBySimpleIsNullWithAnd() {
+
+		var teams = _Team.findAllByNameIsNullAndNameLike("Sox");
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	function testFindAllBySimpleIsNullWithOr() {
+
+		var teams = _Team.findAllByNameIsNullOrNameLike("Sox");
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	function testFindAllBySimpleIsNotNull() {
+
+		var teams = _Team.findAllByNameIsNotNull();
+
+		assertEquals(arrayLen(teams), 5);
+
+	}
+
+	function testFindAllBySimpleIsNotNullWithAnd() {
+
+		var teams = _Team.findAllByNameIsNotNullAndNameLike("Sox");
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	function testFindAllBySimpleIsNotNullWithOr() {
+
+		var teams = _Team.findAllByNameIsNotNullOrNameLike("Sox");
+
+		assertEquals(arrayLen(teams), 5);
 
 	}
 
