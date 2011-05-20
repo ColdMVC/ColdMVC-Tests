@@ -25,7 +25,7 @@
 		<property name="lastName" type="string">
 			<column name="Last_Name" />
 		</property>
-		<one-to-one class="cfc:app.model.Team" name="team" property-ref="manager" />
+		<one-to-one class="cfc:app.model.Team" name="myTeam" property-ref="manager" />
 	</class>
 	<class entity-name="Player" lazy="true" name="cfc:app.model.Player" table="Player">
 		<id name="id" type="int">

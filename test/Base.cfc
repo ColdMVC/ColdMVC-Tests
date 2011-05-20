@@ -1,31 +1,7 @@
 /**
- * @extends mxunit.framework.TestCase
+ * @extends coldmvc.app.test.MXUnit
  */
 component {
-
-	function beforeTests() {
-
-		var pluginManager = new coldmvc.app.util.PluginManager();
-		var xml = fileRead(expandPath("/coldmvc/config/coldspring.xml"));
-		var settings = {
-			controller = "index",
-			development = true,
-			layout = "index"
-		};
-
-		variables.beanFactory = new coldmvc.app.util.BeanFactory(xml, settings, {
-			"pluginManager" = pluginManager
-		});
-
-		var dao = beanFactory.getBean("dao");
-
-		_City = dao.new("City");
-		_Manager = dao.new("Manager");
-		_Player = dao.new("Player");
-		_Position = dao.new("Position");
-		_Team = dao.new("Team");
-
-	}
 
 	private function seed() {
 
@@ -35,7 +11,7 @@ component {
 
 			var boston = _City.findByName("Boston").populate({name = "Boston"});
 			var chicago = _City.findByName("Chicago").populate({name = "Chicago"});
-			var newYork = _City.findByName("newYork").populate({name = "New York"});
+			var newYork = _City.findByName("New York").populate({name = "New York"});
 
 			var cubs = _Team.findByName("Cubs").populate({name = "Cubs", abbreviation = "CHC"});
 			var mets = _Team.findByName("Mets").populate({name = "Mets", abbreviation = "NYM"});

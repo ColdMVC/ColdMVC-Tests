@@ -26,6 +26,6 @@ component  {
 	 * @cfc app.model.Team
 	 * @mappedby manager
 	 */
-	property team;
+	property myTeam;
 
 }
