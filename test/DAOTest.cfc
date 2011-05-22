@@ -24,7 +24,11 @@ component {
 		var q = _Team.createQuery();
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team");
+		assertEqualsCase(hql, "select team from Team as team");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 6);
 
 	}
 
@@ -37,7 +41,11 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team where team.name = :name");
+		assertEqualsCase(hql, "select team from Team as team where team.name = :name");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
 
 	}
 
@@ -45,12 +53,16 @@ component {
 
 		var q = _Team.createQuery();
 		q.where(
-			q.startsWith("name", "Red Sox")
+			q.startsWith("name", "R")
 		);
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team where team.name like :name");
+		assertEqualsCase(hql, "select team from Team as team where team.name like :name");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 2);
 
 	}
 
@@ -63,7 +75,11 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team where team.name like :name");
+		assertEqualsCase(hql, "select team from Team as team where team.name like :name");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 2);
 
 	}
 
@@ -76,7 +92,11 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team where team.name is not null");
+		assertEqualsCase(hql, "select team from Team as team where team.name is not null");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 6);
 
 	}
 
@@ -92,7 +112,11 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team where ( team.name = :name and team.abbreviation = :abbreviation )");
+		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name and team.abbreviation = :abbreviation )");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
 
 	}
 
@@ -108,7 +132,11 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team where ( team.name = :name or team.name = :name_2 )");
+		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name or team.name = :name_2 )");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 2);
 
 	}
 
@@ -122,11 +150,33 @@ component {
 			)
 		);
 
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name or team.abbreviation = :abbreviation )");
+
 		var team = q.get();
 
 		assertTrue(team.exists());
 		assertEquals(team.id(), 3);
 		assertEqualsCase(team.name(), "Red Sox");
+
+	}
+
+	function testQueryGetNotExists() {
+
+		var q = _Team.createQuery();
+		q.where(
+			q.eq("name", "Marlins")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where team.name = :name");
+
+		var team = q.get();
+
+		assertFalse(team.exists());
+		assertTrue(isInstanceOf(team, "app.model.Team"));
 
 	}
 
@@ -145,7 +195,7 @@ component {
 		var hql = q.getHQL();
 		var teams = q.list();
 
-		assertEqualsCase(hql, "select team from Team team where ( team.name = :name or team.name like :name_2 )");
+		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name or team.name like :name_2 )");
 		assertEquals(arrayLen(teams), 3);
 		assertEqualsCase(teams[1].name(), "Cubs");
 		assertEqualsCase(teams[2].name(), "Red Sox");
@@ -163,7 +213,61 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team team join team.city as city where city.name = :name");
+		assertEqualsCase(hql, "select team from Team as team join team.city as city where city.name = :name");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+
+	function testQueryLeftJoin() {
+
+		var q = _Team.createQuery();
+		q.leftJoin("city");
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team left join team.city as city");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 6);
+
+	}
+
+	function testQueryInnerJoin() {
+
+		var q = _Team.createQuery();
+		q.innerJoin("city");
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team inner join team.city as city");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 5);
+
+	}
+
+	function testQueryJoinAlias() {
+
+		var q = _Team.createQuery();
+		q.join("city", "c");
+		q.where(
+			q.eq("c.name", "Boston")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team join team.city as c where c.name = :name");
+
+		var team = q.get();
+
+		assertTrue(team.exists());
+		assertEquals(team.id(), 3);
+		assertEqualsCase(team.name(), "Red Sox");
 
 	}
 
@@ -185,6 +289,9 @@ component {
 		.order("asc");
 
 		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where ( ( team.name like :name or team.name like :name_2 ) or ( team.abbreviation like :abbreviation ) )");
+
 		var teams = q.list();
 
 		assertEquals(arrayLen(teams), 4);
@@ -226,6 +333,9 @@ component {
 		.order("asc");
 
 		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where ( ( ( team.name like :name and ( team.name like :name_2 or team.name is null ) ) or ( team.abbreviation = :abbreviation ) or ( team.name = :name_3 ) ) and team.name != :name_4 ) or team.name = :name_5");
+
 		var teams = q.list();
 
 		assertEquals(arrayLen(teams), 3);
@@ -761,7 +871,7 @@ component {
 
 	}
 
-	public function testCountByRelationshipSingleInValidWithIsNullOperator() {
+	function testCountByRelationshipSingleInValidWithIsNullOperator() {
 
 		var teams = _Team.countByManagerOrManagerIsNull(1);
 

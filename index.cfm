@@ -1,3 +1,3 @@
-<cfset test = "DAOTest" />
+<cfset test = "" />
 
 <cfinclude template="run.cfm" />
