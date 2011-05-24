@@ -19,7 +19,7 @@ component {
 
 	}
 
-	function testQueryHQL() {
+	public function testQueryHQL() {
 
 		var q = _Team.createQuery();
 		var hql = q.getHQL();
@@ -32,7 +32,7 @@ component {
 
 	}
 
-	function testQueryEq() {
+	public function testQueryEq() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -41,7 +41,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where team.name = :name");
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name");
 
 		var teams = q.list();
 
@@ -49,7 +49,7 @@ component {
 
 	}
 
-	function testQueryStartsWith() {
+	public function testQueryStartsWith() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -58,7 +58,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where team.name like :name");
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) like :name");
 
 		var teams = q.list();
 
@@ -66,7 +66,7 @@ component {
 
 	}
 
-	function testQueryLike() {
+	public function testQueryLike() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -75,7 +75,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where team.name like :name");
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) like :name");
 
 		var teams = q.list();
 
@@ -83,7 +83,7 @@ component {
 
 	}
 
-	function testQueryIsNotNull() {
+	public function testQueryIsNotNull() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -100,7 +100,7 @@ component {
 
 	}
 
-	function testQueryAndSimple() {
+	public function testQueryAndSimple() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -112,7 +112,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name and team.abbreviation = :abbreviation )");
+		assertEqualsCase(hql, "select team from Team as team where ( lower(team.name) = :name and lower(team.abbreviation) = :abbreviation )");
 
 		var teams = q.list();
 
@@ -120,7 +120,7 @@ component {
 
 	}
 
-	function testQueryOrSimple() {
+	public function testQueryOrSimple() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -132,7 +132,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name or team.name = :name_2 )");
+		assertEqualsCase(hql, "select team from Team as team where ( lower(team.name) = :name or lower(team.name) = :name_2 )");
 
 		var teams = q.list();
 
@@ -140,7 +140,7 @@ component {
 
 	}
 
-	function testQueryGet() {
+	public function testQueryGet() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -152,7 +152,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name or team.abbreviation = :abbreviation )");
+		assertEqualsCase(hql, "select team from Team as team where ( lower(team.name) = :name or lower(team.abbreviation) = :abbreviation )");
 
 		var team = q.get();
 
@@ -162,7 +162,7 @@ component {
 
 	}
 
-	function testQueryGetNotExists() {
+	public function testQueryGetNotExists() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -171,7 +171,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where team.name = :name");
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name");
 
 		var team = q.get();
 
@@ -180,7 +180,7 @@ component {
 
 	}
 
-	function testQueryList() {
+	public function testQueryList() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -195,7 +195,7 @@ component {
 		var hql = q.getHQL();
 		var teams = q.list();
 
-		assertEqualsCase(hql, "select team from Team as team where ( team.name = :name or team.name like :name_2 )");
+		assertEqualsCase(hql, "select team from Team as team where ( lower(team.name) = :name or lower(team.name) like :name_2 )");
 		assertEquals(arrayLen(teams), 3);
 		assertEqualsCase(teams[1].name(), "Cubs");
 		assertEqualsCase(teams[2].name(), "Red Sox");
@@ -203,7 +203,7 @@ component {
 
 	}
 
-	function testQueryJoin() {
+	public function testQueryJoin() {
 
 		var q = _Team.createQuery();
 		q.join("city");
@@ -213,7 +213,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team join team.city as city where city.name = :name");
+		assertEqualsCase(hql, "select team from Team as team join team.city as city where lower(city.name) = :name");
 
 		var teams = q.list();
 
@@ -221,7 +221,7 @@ component {
 
 	}
 
-	function testQueryLeftJoin() {
+	public function testQueryLeftJoin() {
 
 		var q = _Team.createQuery();
 		q.leftJoin("city");
@@ -236,7 +236,7 @@ component {
 
 	}
 
-	function testQueryInnerJoin() {
+	public function testQueryInnerJoin() {
 
 		var q = _Team.createQuery();
 		q.innerJoin("city");
@@ -251,7 +251,7 @@ component {
 
 	}
 
-	function testQueryJoinAlias() {
+	public function testQueryJoinAlias() {
 
 		var q = _Team.createQuery();
 		q.join("city", "c");
@@ -261,7 +261,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team join team.city as c where c.name = :name");
+		assertEqualsCase(hql, "select team from Team as team join team.city as c where lower(c.name) = :name");
 
 		var team = q.get();
 
@@ -271,7 +271,68 @@ component {
 
 	}
 
-	function testQueryNestedOrs() {
+	public function testQuerySelect() {
+
+		var q = _Team.createQuery();
+		q.select("city");
+		q.innerJoin("team.city", "city");
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select city from Team as team inner join team.city as city");
+
+		var cities = q.list();
+
+		assertTrue(arrayLen(cities), 3);
+
+	}
+
+	public function testQueryCount() {
+
+		var q = _Team.createQuery();
+		q.select("city");
+		q.innerJoin("team.city", "city");
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select city from Team as team inner join team.city as city");
+
+		var count = q.count();
+
+		assertTrue(count, 3);
+
+		var cities = q.list();
+
+		assertTrue(arrayLen(cities), 3);
+
+	}
+
+	public function testQueryGroupBy() {
+
+		var q = _City.createQuery();
+		q.select("city.id, count(team.id)");
+		q.innerJoin("city.teams", "team");
+		q.sort("city.id");
+		q.groupBy("city.id");
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select city.id, count(team.id) from City as city inner join city.teams as team group by city.id");
+
+		var cities = q.list();
+
+		assertTrue(arrayLen(cities), 3);
+		assertEquals(cities[1][1], 1);
+		assertEquals(cities[1][2], 1);
+		assertEquals(cities[2][1], 2);
+		assertEquals(cities[2][2], 2);
+		assertEquals(cities[3][1], 3);
+		assertEquals(cities[3][2], 2);
+
+
+	}
+
+	public function testQueryNestedOrs() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -290,7 +351,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where ( ( team.name like :name or team.name like :name_2 ) or ( team.abbreviation like :abbreviation ) )");
+		assertEqualsCase(hql, "select team from Team as team where ( ( lower(team.name) like :name or lower(team.name) like :name_2 ) or ( lower(team.abbreviation) like :abbreviation ) )");
 
 		var teams = q.list();
 
@@ -302,7 +363,7 @@ component {
 
 	}
 
-	function testQueryNestedAndsAndOrs() {
+	public function testQueryNestedAndsAndOrs() {
 
 		var q = _Team.createQuery();
 		q.where(
@@ -334,7 +395,7 @@ component {
 
 		var hql = q.getHQL();
 
-		assertEqualsCase(hql, "select team from Team as team where ( ( ( team.name like :name and ( team.name like :name_2 or team.name is null ) ) or ( team.abbreviation = :abbreviation ) or ( team.name = :name_3 ) ) and team.name != :name_4 ) or team.name = :name_5");
+		assertEqualsCase(hql, "select team from Team as team where ( ( ( lower(team.name) like :name and ( lower(team.name) like :name_2 or team.name is null ) ) or ( lower(team.abbreviation) = :abbreviation ) or ( lower(team.name) = :name_3 ) ) and lower(team.name) != :name_4 ) or lower(team.name) = :name_5");
 
 		var teams = q.list();
 
@@ -345,7 +406,7 @@ component {
 
 	}
 
-	function testModelMissingMethodSimple() {
+	public function testModelMissingMethodSimple() {
 
 		var team = _Team.new();
 		team.name("Twins");
@@ -354,7 +415,7 @@ component {
 
 	}
 
-	function testModelMissingMethodInvalid() {
+	public function testModelMissingMethodInvalid() {
 
 		var team = _Team.new();
 		team.foo("bar");
@@ -363,7 +424,7 @@ component {
 
 	}
 
-	function testModelPropSimple() {
+	public function testModelPropSimple() {
 
 		var team = _Team.new();
 		team.prop("name", "Twins");
@@ -372,7 +433,7 @@ component {
 
 	}
 
-	function testModelPropOneToOne() {
+	public function testModelPropOneToOne() {
 
 		var manager = _Manager.new();
 
@@ -382,7 +443,7 @@ component {
 
 	}
 
-	function testModelPropOneToOneNull() {
+	public function testModelPropOneToOneNull() {
 
 		var manager = _Manager.new();
 		var team = manager.getMyTeam();
@@ -400,7 +461,7 @@ component {
 
 	}
 
-	function testModelPropOneToOneEmpty() {
+	public function testModelPropOneToOneEmpty() {
 
 		var manager = _Manager.new();
 		manager.prop("myTeam", "");
@@ -427,7 +488,7 @@ component {
 
 	}
 
-	function testModelPropManyToOne() {
+	public function testModelPropManyToOne() {
 
 		var team = _Team.new();
 
@@ -437,7 +498,7 @@ component {
 
 	}
 
-	function testModelPropManyToOneNull() {
+	public function testModelPropManyToOneNull() {
 
 		var team = _Team.new();
 		var city = team.getCity();
@@ -455,7 +516,7 @@ component {
 
 	}
 
-	function testModelPropManyToOneEmpty() {
+	public function testModelPropManyToOneEmpty() {
 
 		var team = _Team.new();
 		team.prop("city", "");
@@ -482,7 +543,7 @@ component {
 
 	}
 
-	function testModelPropOneToManyList() {
+	public function testModelPropOneToManyList() {
 
 		var city = _City.new();
 
@@ -497,7 +558,7 @@ component {
 
 	}
 
-	function testModelPropOneToManyArray() {
+	public function testModelPropOneToManyArray() {
 
 		var city = _City.new();
 
@@ -512,7 +573,7 @@ component {
 
 	}
 
-	function testModelPropOneToManyNull() {
+	public function testModelPropOneToManyNull() {
 
 		var city = _City.new();
 		var teams = city.prop("teams");
@@ -525,7 +586,7 @@ component {
 
 	}
 
-	function testModelPropOneToManyEmpty() {
+	public function testModelPropOneToManyEmpty() {
 
 		var city = _City.new();
 		city.prop("teams", "");
@@ -546,7 +607,7 @@ component {
 
 	}
 
-	function testModelPropManyToManyList() {
+	public function testModelPropManyToManyList() {
 
 		var player = _Player.new();
 
@@ -560,7 +621,7 @@ component {
 
 	}
 
-	function testModelPropManyToManyArray() {
+	public function testModelPropManyToManyArray() {
 
 		var player = _Player.new();
 
@@ -574,7 +635,7 @@ component {
 
 	}
 
-	function testModelPropManyToManyNull() {
+	public function testModelPropManyToManyNull() {
 
 		var player = _Player.new();
 		var positions = player.prop("positions");
@@ -587,7 +648,7 @@ component {
 
 	}
 
-	function testModelPropManyToManyEmpty() {
+	public function testModelPropManyToManyEmpty() {
 
 		var player = _Player.new();
 		player.prop("positions", "");
@@ -608,7 +669,7 @@ component {
 
 	}
 
-	function testModelPopulateSimple() {
+	public function testModelPopulateSimple() {
 
 		var team = _Team.new();
 
@@ -620,7 +681,7 @@ component {
 
 	}
 
-	function testModelPopulateOneToOne() {
+	public function testModelPopulateOneToOne() {
 
 		var manager = _Manager.new();
 
@@ -632,7 +693,7 @@ component {
 
 	}
 
-	function testModelPopulateManyToOne() {
+	public function testModelPopulateManyToOne() {
 
 		var team = _Team.new();
 
@@ -644,7 +705,7 @@ component {
 
 	}
 
-	function testModelPopulateOneToManyList() {
+	public function testModelPopulateOneToManyList() {
 
 		var city = _City.new();
 
@@ -661,7 +722,7 @@ component {
 
 	}
 
-	function testModelPopulateOneToManyArray() {
+	public function testModelPopulateOneToManyArray() {
 
 		var city = _City.new();
 
@@ -678,7 +739,7 @@ component {
 
 	}
 
-	function testGetSimple() {
+	public function testGetSimple() {
 
 		var city = _City.get(1);
 
@@ -686,7 +747,7 @@ component {
 
 	}
 
-	function testGetNotExists() {
+	public function testGetNotExists() {
 
 		var city = _City.get(4);
 
@@ -695,7 +756,23 @@ component {
 
 	}
 
-	function testListSimple() {
+	public function testExistsSimple() {
+
+		var result = _City.exists(1);
+
+		assertTrue(result);
+
+	}
+
+	public function testExistsNotExists() {
+
+		var result = _City.exists(4);
+
+		assertFalse(result);
+
+	}
+
+	public function testListSimple() {
 
 		var cities = _City.list();
 
@@ -703,7 +780,7 @@ component {
 
 	}
 
-	function testListSimpleOptions() {
+	public function testListSimpleOptions() {
 
 		var teams = _Team.list({
 			offset = 2,
@@ -719,7 +796,7 @@ component {
 
 	}
 
-	function testOffsetSimple() {
+	public function testOffsetSimple() {
 
 		var teams = _Team.list({
 			offset = 1
@@ -729,7 +806,7 @@ component {
 
 	}
 
-	function testOffsetTooLow() {
+	public function testOffsetTooLow() {
 
 		var teams = _Team.list({
 			offset = -1
@@ -739,7 +816,7 @@ component {
 
 	}
 
-	function testOffsetTooHigh() {
+	public function testOffsetTooHigh() {
 
 		var teams = _Team.list({
 			offset = 8
@@ -749,7 +826,7 @@ component {
 
 	}
 
-	function testOffsetZero() {
+	public function testOffsetZero() {
 
 		var teams = _Team.list({
 			offset = 0
@@ -759,7 +836,7 @@ component {
 
 	}
 
-	function testMaxSimple() {
+	public function testMaxSimple() {
 
 		var teams = _Team.list({
 			max = 1
@@ -769,7 +846,7 @@ component {
 
 	}
 
-	function testMaxTooLow() {
+	public function testMaxTooLow() {
 
 		var teams = _Team.list({
 			max = -1
@@ -779,7 +856,7 @@ component {
 
 	}
 
-	function testMaxTooHigh() {
+	public function testMaxTooHigh() {
 
 		var teams = _Team.list({
 			max = 8
@@ -789,7 +866,7 @@ component {
 
 	}
 
-	function testMaxZero() {
+	public function testMaxZero() {
 
 		var teams = _Team.list({
 			max = 0
@@ -799,7 +876,7 @@ component {
 
 	}
 
-	function testCountSimple() {
+	public function testCountSimple() {
 
 		var cities = _City.count();
 
@@ -807,7 +884,7 @@ component {
 
 	}
 
-	function testCountBySimple() {
+	public function testCountBySimple() {
 
 		var cities = _City.countByName("Boston");
 
@@ -815,7 +892,7 @@ component {
 
 	}
 
-	function testCountBySimpleInvalid() {
+	public function testCountBySimpleInvalid() {
 
 		var cities = _City.countByName("Fargo");
 
@@ -823,7 +900,7 @@ component {
 
 	}
 
-	function testCountByOperator() {
+	public function testCountByOperator() {
 
 		var managers = _Manager.countByFirstNameStartsWith("T");
 
@@ -831,7 +908,7 @@ component {
 
 	}
 
-	function testCountByOperatorInvalid() {
+	public function testCountByOperatorInvalid() {
 
 		var managers = _Manager.countByFirstNameStartsWith("X");
 
@@ -839,7 +916,7 @@ component {
 
 	}
 
-	function testCountByOperatorWithOr() {
+	public function testCountByOperatorWithOr() {
 
 		var managers = _Manager.countByFirstNameStartsWithOrLastNameLike("T", "uad");
 
@@ -847,7 +924,7 @@ component {
 
 	}
 
-	function testCountByOperatorInvalidWithOr() {
+	public function testCountByOperatorInvalidWithOr() {
 
 		var managers = _Manager.countByFirstNameStartsWithOrLastNameLike("X", "uad");
 
@@ -855,7 +932,7 @@ component {
 
 	}
 
-	function testCountByRelationshipSingle() {
+	public function testCountByRelationshipSingle() {
 
 		var teams = _Team.countByCity(1);
 
@@ -863,7 +940,7 @@ component {
 
 	}
 
-	function testCountByRelationshipSingleValidWithIsNullOperator() {
+	public function testCountByRelationshipSingleValidWithIsNullOperator() {
 
 		var teams = _Team.countByCityOrCityIsNull(1);
 
@@ -871,7 +948,7 @@ component {
 
 	}
 
-	function testCountByRelationshipSingleInValidWithIsNullOperator() {
+	public function testCountByRelationshipSingleInValidWithIsNullOperator() {
 
 		var teams = _Team.countByManagerOrManagerIsNull(1);
 
@@ -879,7 +956,7 @@ component {
 
 	}
 
-	function testCountByRelationshipSingleWithIsNullSecondOperator() {
+	public function testCountByRelationshipSingleWithIsNullSecondOperator() {
 
 		var teams = _Team.countByCityIsNullOrCity(1);
 
@@ -887,7 +964,7 @@ component {
 
 	}
 
-	function testCountByRelationshipMultiple() {
+	public function testCountByRelationshipMultiple() {
 
 		var teams = _Team.countByCity(2);
 
@@ -895,7 +972,7 @@ component {
 
 	}
 
-	function testCountByRelationshipNone() {
+	public function testCountByRelationshipNone() {
 
 		var teams = _Team.countByCity(4);
 
@@ -903,7 +980,7 @@ component {
 
 	}
 
-	function testCountByRelationshipObjectSingle() {
+	public function testCountByRelationshipObjectSingle() {
 
 		var city = _Team.get(1);
 		var teams = _Team.countByCity(city);
@@ -912,7 +989,7 @@ component {
 
 	}
 
-	function testCountByRelationshipObjectMultiple() {
+	public function testCountByRelationshipObjectMultiple() {
 
 		var city = _Team.get(2);
 		var teams = _Team.countByCity(city);
@@ -921,7 +998,7 @@ component {
 
 	}
 
-	function testCountByRelationshipObjectNone() {
+	public function testCountByRelationshipObjectNone() {
 
 		var city = _Team.get(4);
 		var teams = _Team.countByCity(city);
@@ -930,7 +1007,7 @@ component {
 
 	}
 
-	function testFindBySimple() {
+	public function testFindBySimple() {
 
 		var team = _Team.findByName("Red Sox");
 
@@ -940,7 +1017,7 @@ component {
 
 	}
 
-	function testFindBySimpleIsNull() {
+	public function testFindBySimpleIsNull() {
 
 		var team = _Team.findByNameIsNull();
 
@@ -948,7 +1025,7 @@ component {
 
 	}
 
-	function testFindBySimpleIsNotNullWithAnd() {
+	public function testFindBySimpleIsNotNullWithAnd() {
 
 		var team = _Team.findByNameIsNotNullAndNameLike("Red");
 
@@ -958,7 +1035,7 @@ component {
 
 	}
 
-	function testFindBySimpleIsNullWithOr() {
+	public function testFindBySimpleIsNullWithOr() {
 
 		var team = _Team.findByNameIsNullOrNameLike("Red");
 
@@ -968,7 +1045,7 @@ component {
 
 	}
 
-	function testFindBySimpleNone() {
+	public function testFindBySimpleNone() {
 
 		var team = _Team.findByName("Twins");
 
@@ -977,7 +1054,7 @@ component {
 
 	}
 
-	function testFindAllBySimple() {
+	public function testFindAllBySimple() {
 
 		var teams = _Team.findAllByName("Yankees");
 
@@ -985,7 +1062,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleIsNull() {
+	public function testFindAllBySimpleIsNull() {
 
 		var teams = _Team.findAllByNameIsNull();
 
@@ -993,7 +1070,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleIsNullWithAnd() {
+	public function testFindAllBySimpleIsNullWithAnd() {
 
 		var teams = _Team.findAllByNameIsNullAndNameLike("Sox");
 
@@ -1001,7 +1078,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleIsNullWithOr() {
+	public function testFindAllBySimpleIsNullWithOr() {
 
 		var teams = _Team.findAllByNameIsNullOrNameLike("Sox");
 
@@ -1009,7 +1086,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleIsNotNull() {
+	public function testFindAllBySimpleIsNotNull() {
 
 		var teams = _Team.findAllByNameIsNotNull();
 
@@ -1017,7 +1094,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleIsNotNullWithAnd() {
+	public function testFindAllBySimpleIsNotNullWithAnd() {
 
 		var teams = _Team.findAllByNameIsNotNullAndNameLike("Sox");
 
@@ -1025,7 +1102,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleIsNotNullWithOr() {
+	public function testFindAllBySimpleIsNotNullWithOr() {
 
 		var teams = _Team.findAllByNameIsNotNullOrNameLike("Sox");
 
@@ -1033,7 +1110,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleNone() {
+	public function testFindAllBySimpleNone() {
 
 		var teams = _Team.findAllByName("Twins");
 
@@ -1041,7 +1118,7 @@ component {
 
 	}
 
-	function testFindAllBySimpleInValid() {
+	public function testFindAllBySimpleInValid() {
 
 		var error = false;
 
@@ -1055,7 +1132,7 @@ component {
 
 	}
 
-	function testFindAllByRelationshipSingle() {
+	public function testFindAllByRelationshipSingle() {
 
 		var teams = _Team.findAllByCity(1);
 
@@ -1063,7 +1140,7 @@ component {
 
 	}
 
-	function testFindByRelationshipWithAlias() {
+	public function testFindByRelationshipWithAlias() {
 
 		var manager = _Manager.findByMyTeam(3);
 
@@ -1073,7 +1150,7 @@ component {
 
 	}
 
-	function testFindAllByRelationshipMultiple() {
+	public function testFindAllByRelationshipMultiple() {
 
 		var teams = _Team.findAllByCity(2);
 
@@ -1081,7 +1158,7 @@ component {
 
 	}
 
-	function testFindAllByRelationshipNone() {
+	public function testFindAllByRelationshipNone() {
 
 		var teams = _Team.findAllByCity(4);
 
@@ -1089,7 +1166,7 @@ component {
 
 	}
 
-	function testFindAllByRelationshipObjectSingle() {
+	public function testFindAllByRelationshipObjectSingle() {
 
 		var city = _Team.get(1);
 		var teams = _Team.findAllByCity(city);
@@ -1098,7 +1175,7 @@ component {
 
 	}
 
-	function testFindAllByRelationshipObjectMultiple() {
+	public function testFindAllByRelationshipObjectMultiple() {
 
 		var city = _Team.get(2);
 		var teams = _Team.findAllByCity(city);
@@ -1107,7 +1184,7 @@ component {
 
 	}
 
-	function testFindAllByRelationshipObjectNone() {
+	public function testFindAllByRelationshipObjectNone() {
 
 		var city = _Team.get(4);
 		var teams = _Team.findAllByCity(city);
@@ -1116,7 +1193,7 @@ component {
 
 	}
 
-	function testFindWhereSimple() {
+	public function testFindWhereSimple() {
 
 		var team = _Team.findWhere({
 			name = "Red Sox"
@@ -1128,7 +1205,7 @@ component {
 
 	}
 
-	function testFindWhereSimpleNone() {
+	public function testFindWhereSimpleNone() {
 
 		var team = _Team.findWhere({
 			name = "Twins"
@@ -1139,7 +1216,7 @@ component {
 
 	}
 
-	function testFindAllWhereSimple() {
+	public function testFindAllWhereSimple() {
 
 		var teams = _Team.findAllWhere({
 			name = "Yankees"
@@ -1149,7 +1226,7 @@ component {
 
 	}
 
-	function testFindAllWhereSimpleNone() {
+	public function testFindAllWhereSimpleNone() {
 
 		var teams = _Team.findAllWhere({
 			name = "Twins"
@@ -1159,7 +1236,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipSingle() {
+	public function testFindAllWhereRelationshipSingle() {
 
 		var teams = _Team.findAllWhere({
 			city = 1
@@ -1169,7 +1246,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipMultiple() {
+	public function testFindAllWhereRelationshipMultiple() {
 
 		var teams = _Team.findAllWhere({
 			city = 2
@@ -1179,7 +1256,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipNone() {
+	public function testFindAllWhereRelationshipNone() {
 
 		var teams = _Team.findAllWhere({
 			city = 4
@@ -1189,7 +1266,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipObjectSingle() {
+	public function testFindAllWhereRelationshipObjectSingle() {
 
 		var city = _Team.get(1);
 		var teams = _Team.findAllWhere({
@@ -1200,7 +1277,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipObjectMultiple() {
+	public function testFindAllWhereRelationshipObjectMultiple() {
 
 		var city = _Team.get(2);
 		var teams = _Team.findAllWhere({
@@ -1211,7 +1288,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipObjectNone() {
+	public function testFindAllWhereRelationshipObjectNone() {
 
 		var city = _Team.get(4);
 		var teams = _Team.findAllWhere({
@@ -1222,7 +1299,7 @@ component {
 
 	}
 
-	function testFindWhereSimpleOperator() {
+	public function testFindWhereSimpleOperator() {
 
 		var team = _Team.findWhere({
 			name = [ "startsWith", "R" ]
@@ -1234,7 +1311,7 @@ component {
 
 	}
 
-	function testFindWhereSimpleOperatorNone() {
+	public function testFindWhereSimpleOperatorNone() {
 
 		var team = _Team.findWhere({
 			name = [ "startsWith", "T" ]
@@ -1245,7 +1322,7 @@ component {
 
 	}
 
-	function testFindAllWhereSimpleOperator() {
+	public function testFindAllWhereSimpleOperator() {
 
 		var teams = _Team.findAllWhere({
 			name = [ "like" , "Sox" ]
@@ -1255,7 +1332,7 @@ component {
 
 	}
 
-	function testFindAllWhereSimpleOperatorNone() {
+	public function testFindAllWhereSimpleOperatorNone() {
 
 		var teams = _Team.findAllWhere({
 			name = [ "like" , "win" ]
@@ -1265,7 +1342,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipOperatorSingle() {
+	public function testFindAllWhereRelationshipOperatorSingle() {
 
 		var teams = _Team.findAllWhere({
 			city = [ "notEqual", 1 ]
@@ -1275,7 +1352,7 @@ component {
 
 	}
 
-	function testFindAllWhereRelationshipOperatorMultiple() {
+	public function testFindAllWhereRelationshipOperatorMultiple() {
 
 		var teams = _Team.findAllWhere({
 			city = [ "isNotNull" ]
@@ -1285,7 +1362,7 @@ component {
 
 	}
 
-	function testGetAllSimple() {
+	public function testGetAllSimple() {
 
 		var teams = _Team.getAll("3,1,8,2");
 
@@ -1296,7 +1373,7 @@ component {
 
 	}
 
-	function testGetAllWithOptions() {
+	public function testGetAllWithOptions() {
 
 		var teams = _Team.getAll("3,1,8,2", {
 			sort = "name",
@@ -1310,7 +1387,7 @@ component {
 
 	}
 
-	function testGetAllSimpleArray() {
+	public function testGetAllSimpleArray() {
 
 		var teams = _Team.getAll([3,1,8,2]);
 
@@ -1321,7 +1398,7 @@ component {
 
 	}
 
-	function testGetAllArrayWithOptions() {
+	public function testGetAllArrayWithOptions() {
 
 		var teams = _Team.getAll([3,1,8,2], {
 			sort = "name",
@@ -1335,7 +1412,7 @@ component {
 
 	}
 
-	function testFindWhereNestedSimple() {
+	public function testFindWhereNestedSimple() {
 
 		var manager = _Manager.findWhere({
 			"myTeam.CITY.NaMe" = "Boston"
@@ -1347,7 +1424,7 @@ component {
 
 	}
 
-	function testFindWhereNestedSimpleNone() {
+	public function testFindWhereNestedSimpleNone() {
 
 		var manager = _Manager.findWhere({
 			"myTeam.city.name" = "Minneapolis"
@@ -1358,7 +1435,7 @@ component {
 
 	}
 
-	function testFindAllWhereNestedSimple() {
+	public function testFindAllWhereNestedSimple() {
 
 		var managers = _Manager.findAllWhere({
 			"myTeam.city.name" = "New York"
@@ -1368,7 +1445,7 @@ component {
 
 	}
 
-	function testFindAllWhereNestedSimpleNone() {
+	public function testFindAllWhereNestedSimpleNone() {
 
 		var managers = _Manager.findAllWhere({
 			"myTeam.city.name" = "Minneapolis"
@@ -1378,7 +1455,7 @@ component {
 
 	}
 
-	function testFindWhereNestedRelationshipSimple() {
+	public function testFindWhereNestedRelationshipSimple() {
 
 		var manager = _Manager.findWhere({
 			"myTeam.city" = "1"
@@ -1390,7 +1467,7 @@ component {
 
 	}
 
-	function testFindAllWhereNestedRelationshipSingle() {
+	public function testFindAllWhereNestedRelationshipSingle() {
 
 		var managers = _Manager.findAllWhere({
 			"myTeam.city" = "1"
@@ -1400,7 +1477,7 @@ component {
 
 	}
 
-	function testFindAllWhereNestedRelationshipMultiple() {
+	public function testFindAllWhereNestedRelationshipMultiple() {
 
 		var managers = _Manager.findAllWhere({
 			"manager.myTeam.city" = "2"
@@ -1410,7 +1487,7 @@ component {
 
 	}
 
-	function testFindAllWhereNestedRelationshipNone() {
+	public function testFindAllWhereNestedRelationshipNone() {
 
 		var managers = _Manager.findAllWhere({
 			"myTeam.city.id" = "4"
@@ -1420,7 +1497,7 @@ component {
 
 	}
 
-	function testFindSimple() {
+	public function testFindSimple() {
 
 		var team = _Team.find("from Team team where name = :name", {
 			name = "Red Sox"
@@ -1432,7 +1509,7 @@ component {
 
 	}
 
-	function testFindAllSimple() {
+	public function testFindAllSimple() {
 
 		var managers = _Manager.findAll("from Manager manager where firstName = :firstName", {
 			firstName = "Terry"
@@ -1442,7 +1519,7 @@ component {
 
 	}
 
-	function testCountWhereSimple() {
+	public function testCountWhereSimple() {
 
 		var teams = _Team.countWhere({
 			name = "Yankees"
@@ -1452,7 +1529,7 @@ component {
 
 	}
 
-	function testCountWhereSimpleNone() {
+	public function testCountWhereSimpleNone() {
 
 		var teams = _Team.countWhere({
 			name = "Twins"
@@ -1462,7 +1539,7 @@ component {
 
 	}
 
-	function testCountWhereRelationshipSingle() {
+	public function testCountWhereRelationshipSingle() {
 
 		var teams = _Team.countWhere({
 			city = 1
@@ -1472,7 +1549,7 @@ component {
 
 	}
 
-	function testCountWhereRelationshipMultiple() {
+	public function testCountWhereRelationshipMultiple() {
 
 		var teams = _Team.countWhere({
 			city = 2
@@ -1482,7 +1559,7 @@ component {
 
 	}
 
-	function testCountWhereRelationshipNone() {
+	public function testCountWhereRelationshipNone() {
 
 		var teams = _Team.countWhere({
 			city = 4
@@ -1492,7 +1569,7 @@ component {
 
 	}
 
-	function testCountWhereRelationshipObjectSingle() {
+	public function testCountWhereRelationshipObjectSingle() {
 
 		var city = _Team.get(1);
 		var teams = _Team.countWhere({
@@ -1503,7 +1580,7 @@ component {
 
 	}
 
-	function testCountWhereRelationshipObjectMultiple() {
+	public function testCountWhereRelationshipObjectMultiple() {
 
 		var city = _Team.get(2);
 		var teams = _Team.countWhere({
@@ -1514,7 +1591,7 @@ component {
 
 	}
 
-	function testCountWhereRelationshipObjectNone() {
+	public function testCountWhereRelationshipObjectNone() {
 
 		var city = _Team.get(4);
 		var teams = _Team.countWhere({

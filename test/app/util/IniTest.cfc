@@ -10,7 +10,7 @@ component {
 
 	}
 
-	function testSectionsIsAStruct() {
+	public function testSectionsIsAStruct() {
 
 		var sections = ini.getSections();
 
@@ -18,7 +18,7 @@ component {
 
 	}
 
-	function testSectionsHasCorrectKeyCount() {
+	public function testSectionsHasCorrectKeyCount() {
 
 		var sections = ini.getSections();
 
@@ -26,7 +26,7 @@ component {
 
 	}
 
-	function testSimpleSectionIsAStruct() {
+	public function testSimpleSectionIsAStruct() {
 
 		var section = ini.getSection("production");
 
@@ -34,7 +34,7 @@ component {
 
 	}
 
-	function testSimpleSectionHasCorrectKeyCount() {
+	public function testSimpleSectionHasCorrectKeyCount() {
 
 		var section = ini.getSection("production");
 
@@ -42,7 +42,7 @@ component {
 
 	}
 
-	function testInheritedSectionIsAStruct() {
+	public function testInheritedSectionIsAStruct() {
 
 		var section = ini.getSection("development");
 
@@ -50,7 +50,7 @@ component {
 
 	}
 
-	function testInheritedSectionHasCorrectKeyCount() {
+	public function testInheritedSectionHasCorrectKeyCount() {
 
 		var section = ini.getSection("development");
 
@@ -58,7 +58,7 @@ component {
 
 	}
 
-	function testInheritedSectionHasCorrectKeys() {
+	public function testInheritedSectionHasCorrectKeys() {
 
 		var section = ini.getSection("development");
 
@@ -82,7 +82,7 @@ component {
 
 	}
 
-	function testPartiallyInheritedSectionHasCorrectKeyCount() {
+	public function testPartiallyInheritedSectionHasCorrectKeyCount() {
 
 		var section = ini.getSection("testing");
 
@@ -90,7 +90,7 @@ component {
 
 	}
 
-	function testNestedPropertyExists() {
+	public function testNestedPropertyExists() {
 
 		var section = ini.getSection("development");
 
@@ -98,7 +98,7 @@ component {
 
 	}
 
-	function testNestedPropertyIsAStruct() {
+	public function testNestedPropertyIsAStruct() {
 
 		var section = ini.getSection("development");
 
@@ -106,7 +106,7 @@ component {
 
 	}
 
-	function testNestedPropertyHasCorrectKeyCount() {
+	public function testNestedPropertyHasCorrectKeyCount() {
 
 		var section = ini.getSection("development");
 
@@ -114,7 +114,7 @@ component {
 
 	}
 
-	function testNestedPropertyHasCorrectKeyValues() {
+	public function testNestedPropertyHasCorrectKeyValues() {
 
 		var section = ini.getSection("development");
 
@@ -123,7 +123,7 @@ component {
 
 	}
 
-	function testNestedPropertyHasCorrectKeys() {
+	public function testNestedPropertyHasCorrectKeys() {
 
 		var section = ini.getSection("development");
 
@@ -132,7 +132,7 @@ component {
 
 	}
 
-	function testNestedPropertyStillExists() {
+	public function testNestedPropertyStillExists() {
 
 		var section = ini.getSection("development");
 
@@ -141,7 +141,7 @@ component {
 
 	}
 
-	function testJSONStructExists() {
+	public function testJSONStructExists() {
 
 		var section = ini.getSection("development");
 
@@ -149,7 +149,7 @@ component {
 
 	}
 
-	function testJSONStructIsAStruct() {
+	public function testJSONStructIsAStruct() {
 
 		var section = ini.getSection("development");
 
@@ -157,7 +157,7 @@ component {
 
 	}
 
-	function testJSONStructHasCorrectKeyCount() {
+	public function testJSONStructHasCorrectKeyCount() {
 
 		var section = ini.getSection("development");
 
@@ -165,7 +165,7 @@ component {
 
 	}
 
-	function testJSONStructHasCorrectKeys() {
+	public function testJSONStructHasCorrectKeys() {
 
 		var section = ini.getSection("development");
 
@@ -174,7 +174,7 @@ component {
 
 	}
 
-	function testJSONStructHasCorrectKeyValues() {
+	public function testJSONStructHasCorrectKeyValues() {
 
 		var section = ini.getSection("development");
 
@@ -183,7 +183,7 @@ component {
 
 	}
 
-	function testJSONArrayExists() {
+	public function testJSONArrayExists() {
 
 		var section = ini.getSection("development");
 
@@ -191,7 +191,7 @@ component {
 
 	}
 
-	function testJSONArrayIsAnArray() {
+	public function testJSONArrayIsAnArray() {
 
 		var section = ini.getSection("development");
 
@@ -199,7 +199,7 @@ component {
 
 	}
 
-	function testJSONStringIsABoolean() {
+	public function testJSONStringIsABoolean() {
 
 		var section = ini.getSection("development");
 
@@ -207,7 +207,7 @@ component {
 
 	}
 
-	function testInheritedValueExists() {
+	public function testInheritedValueExists() {
 
 		var section = ini.getSection("development");
 
@@ -215,7 +215,7 @@ component {
 
 	}
 
-	function testInheritedValueIsCorrect() {
+	public function testInheritedValueIsCorrect() {
 
 		var section = ini.getSection("development");
 
@@ -223,7 +223,7 @@ component {
 
 	}
 
-	function testOverriddenValueExists() {
+	public function testOverriddenValueExists() {
 
 		var section = ini.getSection("development");
 
@@ -231,7 +231,7 @@ component {
 
 	}
 
-	function testOverriddenValueIsCorrect() {
+	public function testOverriddenValueIsCorrect() {
 
 		var section = ini.getSection("development");
 

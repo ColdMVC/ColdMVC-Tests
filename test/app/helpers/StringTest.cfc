@@ -11,585 +11,651 @@ component {
 
 	}
 
-	function testSingularizeProducts() {
+	public function testSingularizeProducts() {
 
 		assertEqualsCase(coldmvc.string.singularize("products"), "product");
 
 	}
 
-	function testSingularizeCategories() {
+	public function testSingularizeCategories() {
 
 		assertEqualsCase(coldmvc.string.singularize("categories"), "category");
 
 	}
 
-	function testSingularizePeople() {
+	public function testSingularizePeople() {
 
 		assertEqualsCase(coldmvc.string.singularize("people"), "person");
 
 	}
 
-	function testSingularizeWomen() {
+	public function testSingularizeWomen() {
 
 		assertEqualsCase(coldmvc.string.singularize("women"), "woman");
 
 	}
 
-	function testSingularizeCamelCase() {
+	public function testSingularizeCamelCase() {
 
 		assertEqualsCase(coldmvc.string.singularize("productCategories"), "productCategory");
 
 	}
 
-	function testSingularizeUnderscore() {
+	public function testSingularizeUnderscore() {
 
 		assertEqualsCase(coldmvc.string.singularize("product_categories"), "product_category");
 
 	}
 
-	function testSingularizeHyphen() {
+	public function testSingularizeHyphen() {
 
 		assertEqualsCase(coldmvc.string.singularize("product-categories"), "product-category");
 
 	}
 
-	function testPluralizeProducts() {
+	public function testPluralizeProducts() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product"), "products");
 
 	}
 
-	function testPluralizeCategories() {
+	public function testPluralizeCategories() {
 
 		assertEqualsCase(coldmvc.string.pluralize("category"), "categories");
 
 	}
 
-	function testPluralizePeople() {
+	public function testPluralizePeople() {
 
 		assertEqualsCase(coldmvc.string.pluralize("person"), "people");
 
 	}
 
-	function testPluralizeWomen() {
+	public function testPluralizeWomen() {
 
 		assertEqualsCase(coldmvc.string.pluralize("woman"), "women");
 
 	}
 
-	function testPluralizeCamelCase() {
+	public function testPluralizeCamelCase() {
 
 		assertEqualsCase(coldmvc.string.pluralize("productCategory"), "productCategories");
 
 	}
 
-	function testPluralizeUnderscore() {
+	public function testPluralizeUnderscore() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product_category"), "product_categories");
 
 	}
 
-	function testPluralizeHyphen() {
+	public function testPluralizeHyphen() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product-category"), "product-categories");
 
 	}
 
-	function testPluralizeProductsWithZeroCount() {
+	public function testPluralizeProductsWithZeroCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product", 0), "products");
 
 	}
 
-	function testPluralizeCategoriesWithZeroCount() {
+	public function testPluralizeCategoriesWithZeroCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("category", 0), "categories");
 
 	}
 
-	function testPluralizePeopleWithZeroCount() {
+	public function testPluralizePeopleWithZeroCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("person", 0), "people");
 
 	}
 
-	function testPluralizeWomenWithZeroCount() {
+	public function testPluralizeWomenWithZeroCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("woman", 0), "women");
 
 	}
 
-	function testPluralizeCamelCaseWithZeroCount() {
+	public function testPluralizeCamelCaseWithZeroCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("productCategory", 0), "productCategories");
 
 	}
 
-	function testPluralizeUnderscoreWithZeroCount() {
+	public function testPluralizeUnderscoreWithZeroCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product_category", 0), "product_categories");
 
 	}
 
-	function testPluralizeHyphenWithZeroCount() {
+	public function testPluralizeHyphenWithZeroCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product-category", 0), "product-categories");
 
 	}
 
-	function testPluralizeProductsWithOneCount() {
+	public function testPluralizeProductsWithOneCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product", 1), "product");
 
 	}
 
-	function testPluralizeCategoriesWithOneCount() {
+	public function testPluralizeCategoriesWithOneCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("category", 1), "category");
 
 	}
 
-	function testPluralizePeopleWithOneCount() {
+	public function testPluralizePeopleWithOneCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("person", 1), "person");
 
 	}
 
-	function testPluralizeWomenWithOneCount() {
+	public function testPluralizeWomenWithOneCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("woman", 1), "woman");
 
 	}
 
-	function testPluralizeCamelCaseWithOneCount() {
+	public function testPluralizeCamelCaseWithOneCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("productCategory", 1), "productCategory");
 
 	}
 
-	function testPluralizeUnderscoreWithOneCount() {
+	public function testPluralizeUnderscoreWithOneCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product_category", 1), "product_category");
 
 	}
 
-	function testPluralizeHyphenWithOneCount() {
+	public function testPluralizeHyphenWithOneCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product-category", 1), "product-category");
 
 	}
 
-	function testPluralizeProductsWithMultipleCount() {
+	public function testPluralizeProductsWithMultipleCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product", 2), "products");
 
 	}
 
-	function testPluralizeCategoriesWithMultipleCount() {
+	public function testPluralizeCategoriesWithMultipleCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("category", 2), "categories");
 
 	}
 
-	function testPluralizePeopleWithMultipleCount() {
+	public function testPluralizePeopleWithMultipleCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("person", 2), "people");
 
 	}
 
-	function testPluralizeWomenWithMultipleCount() {
+	public function testPluralizeWomenWithMultipleCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("woman", 2), "women");
 
 	}
 
-	function testPluralizeCamelCaseWithMultipleCount() {
+	public function testPluralizeCamelCaseWithMultipleCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("productCategory", 2), "productCategories");
 
 	}
 
-	function testPluralizeUnderscoreWithMultipleCount() {
+	public function testPluralizeUnderscoreWithMultipleCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product_category", 2), "product_categories");
 
 	}
 
-	function testPluralizeHyphenWithMultipleCount() {
+	public function testPluralizeHyphenWithMultipleCount() {
 
 		assertEqualsCase(coldmvc.string.pluralize("product-category", 2), "product-categories");
 
 	}
 
-	function testCapitalizeSingleWord() {
+	public function testCapitalizeSingleWord() {
 
 		assertEqualsCase(coldmvc.string.capitalize("foo"), "Foo");
 
 	}
 
-	function testCapitalizeCamelCase() {
+	public function testCapitalizeCamelCase() {
 
 		assertEqualsCase(coldmvc.string.capitalize("fooBar"), "Foobar");
 
 	}
 
-	function testCapitalizeUnderscore() {
+	public function testCapitalizeUnderscore() {
 
 		assertEqualsCase(coldmvc.string.capitalize("foo_bar"), "Foo Bar");
 
 	}
 
-	function testCapitalizeHyphen() {
+	public function testCapitalizeHyphen() {
 
 		assertEqualsCase(coldmvc.string.capitalize("foo-bar"), "Foo Bar");
 
 	}
 
-	function testCapitalizePhrase() {
+	public function testCapitalizePhrase() {
 
 		assertEqualsCase(coldmvc.string.capitalize("foo of bar"), "Foo of Bar");
 
 	}
 
-	function testCamelizeSingleWord() {
+	public function testCamelizeSingleWord() {
 
 		assertEqualsCase(coldmvc.string.camelize("foo"), "foo");
 
 	}
 
-	function testCamelizeCamelCase() {
+	public function testCamelizeCamelCase() {
 
 		assertEqualsCase(coldmvc.string.camelize("fooBar"), "fooBar");
 
 	}
 
-	function testCamelizePascalCase() {
+	public function testCamelizePascalCase() {
 
 		assertEqualsCase(coldmvc.string.camelize("FooBar"), "fooBar");
 
 	}
 
-	function testCamelizeUnderscore() {
+	public function testCamelizeUnderscore() {
 
 		assertEqualsCase(coldmvc.string.camelize("foo_bar"), "fooBar");
 
 	}
 
-	function testCamelizeHyphen() {
+	public function testCamelizeHyphen() {
 
 		assertEqualsCase(coldmvc.string.camelize("foo-bar"), "fooBar");
 
 	}
 
-	function testCamelizePhrase() {
+	public function testCamelizePhrase() {
 
 		assertEqualsCase(coldmvc.string.camelize("foo of bar"), "fooOfBar");
 
 	}
 
-	function testPascalizeSingleWord() {
+	public function testPascalizeSingleWord() {
 
 		assertEqualsCase(coldmvc.string.pascalize("foo"), "Foo");
 
 	}
 
-	function testPascalizePascalCase() {
+	public function testPascalizePascalCase() {
 
 		assertEqualsCase(coldmvc.string.pascalize("FooBar"), "FooBar");
 
 	}
 
-	function testPascalizeCamelCase() {
+	public function testPascalizeCamelCase() {
 
 		assertEqualsCase(coldmvc.string.pascalize("fooBar"), "FooBar");
 
 	}
 
-	function testPascalizeUnderscore() {
+	public function testPascalizeUnderscore() {
 
 		assertEqualsCase(coldmvc.string.pascalize("foo_bar"), "FooBar");
 
 	}
 
-	function testPascalizeHyphen() {
+	public function testPascalizeHyphen() {
 
 		assertEqualsCase(coldmvc.string.pascalize("foo-bar"), "FooBar");
 
 	}
 
-	function testPascalizePhrase() {
+	public function testPascalizePhrase() {
 
 		assertEqualsCase(coldmvc.string.pascalize("foo of bar"), "FooOfBar");
 
 	}
 
-	function testUpperfirstSingleWord() {
+	public function testUpperfirstSingleWord() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("foo"), "Foo");
 
 	}
 
-	function testUpperfirstPascalCase() {
+	public function testUpperfirstPascalCase() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("FooBar"), "FooBar");
 
 	}
 
-	function testUpperfirstCamelCase() {
+	public function testUpperfirstCamelCase() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("fooBar"), "FooBar");
 
 	}
 
-	function testUpperfirstUpperUnderscore() {
+	public function testUpperfirstUpperUnderscore() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("Foo_Bar"), "Foo_Bar");
 
 	}
 
-	function testUpperfirstLowerUnderscore() {
+	public function testUpperfirstLowerUnderscore() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("foo_bar"), "Foo_bar");
 
 	}
 
-	function testUpperfirstUpperHyphen() {
+	public function testUpperfirstUpperHyphen() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("Foo-Bar"), "Foo-Bar");
 
 	}
 
-	function testUpperfirstLowerHyphen() {
+	public function testUpperfirstLowerHyphen() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("foo-bar"), "Foo-bar");
 
 	}
 
-	function testUpperfirstUpperPhrase() {
+	public function testUpperfirstUpperPhrase() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("Foo Of Bar"), "Foo Of Bar");
 
 	}
 
-	function testUpperfirstLowerPhrase() {
+	public function testUpperfirstLowerPhrase() {
 
 		assertEqualsCase(coldmvc.string.upperfirst("foo of bar"), "Foo of bar");
 
 	}
 
-	function testLowerfirstSingleWord() {
+	public function testLowerfirstSingleWord() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("foo"), "foo");
 
 	}
 
-	function testLowerfirstPascalCase() {
+	public function testLowerfirstPascalCase() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("FooBar"), "fooBar");
 
 	}
 
-	function testLowerfirstCamelCase() {
+	public function testLowerfirstCamelCase() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("fooBar"), "fooBar");
 
 	}
 
-	function testLowerfirstUpperUnderscore() {
+	public function testLowerfirstUpperUnderscore() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("Foo_Bar"), "foo_Bar");
 
 	}
 
-	function testLowerfirstLowerUnderscore() {
+	public function testLowerfirstLowerUnderscore() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("foo_bar"), "foo_bar");
 
 	}
 
-	function testLowerfirstUpperHyphen() {
+	public function testLowerfirstUpperHyphen() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("Foo-Bar"), "foo-Bar");
 
 	}
 
-	function testLowerfirstLowerHyphen() {
+	public function testLowerfirstLowerHyphen() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("foo-bar"), "foo-bar");
 
 	}
 
-	function testLowerfirstUpperPhrase() {
+	public function testLowerfirstUpperPhrase() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("Foo Of Bar"), "foo Of Bar");
 
 	}
 
-	function testLowerfirstLowerPhrase() {
+	public function testLowerfirstLowerPhrase() {
 
 		assertEqualsCase(coldmvc.string.lowerfirst("foo of bar"), "foo of bar");
 
 	}
 
-	function testHumanizeSingleWord() {
+	public function testHumanizeSingleWord() {
 
 		assertEqualsCase(coldmvc.string.humanize("foo"), "Foo");
 
 	}
 
-	function testHumanizePascalCase() {
+	public function testHumanizePascalCase() {
 
 		assertEqualsCase(coldmvc.string.humanize("FooBar"), "Foobar");
 
 	}
 
-	function testHumanizeCamelCase() {
+	public function testHumanizeCamelCase() {
 
 		assertEqualsCase(coldmvc.string.humanize("fooBar"), "Foobar");
 
 	}
 
-	function testHumanizeUpperUnderscore() {
+	public function testHumanizeUpperUnderscore() {
 
 		assertEqualsCase(coldmvc.string.humanize("Foo_Bar"), "Foo bar");
 
 	}
 
-	function testHumanizeLowerUnderscore() {
+	public function testHumanizeLowerUnderscore() {
 
 		assertEqualsCase(coldmvc.string.humanize("foo_bar"), "Foo bar");
 
 	}
 
-	function testHumanizeUpperHyphen() {
+	public function testHumanizeUpperHyphen() {
 
 		assertEqualsCase(coldmvc.string.humanize("Foo-Bar"), "Foo bar");
 
 	}
 
-	function testHumanizeLowerHyphen() {
+	public function testHumanizeLowerHyphen() {
 
 		assertEqualsCase(coldmvc.string.humanize("foo-bar"), "Foo bar");
 
 	}
 
-	function testHumanizeUpperPhrase() {
+	public function testHumanizeUpperPhrase() {
 
 		assertEqualsCase(coldmvc.string.humanize("Foo Of Bar"), "Foo of bar");
 
 	}
 
-	function testHumanizeLowerPhrase() {
+	public function testHumanizeLowerPhrase() {
 
 		assertEqualsCase(coldmvc.string.humanize("foo of bar"), "Foo of bar");
 
 	}
 
-	function testUnderscoreSingleWord() {
+	public function testUnderscoreSingleWord() {
 
 		assertEqualsCase(coldmvc.string.underscore("foo"), "foo");
 
 	}
 
-	function testUnderscorePascalCase() {
+	public function testUnderscorePascalCase() {
 
 		assertEqualsCase(coldmvc.string.underscore("FooBar"), "foo_bar");
 
 	}
 
-	function testUnderscoreCamelCase() {
+	public function testUnderscoreCamelCase() {
 
 		assertEqualsCase(coldmvc.string.underscore("fooBar"), "foo_bar");
 
 	}
 
-	function testUnderscoreUpperUnderscore() {
+	public function testUnderscoreUpperUnderscore() {
 
 		assertEqualsCase(coldmvc.string.underscore("Foo_Bar"), "foo_bar");
 
 	}
 
-	function testUnderscoreLowerUnderscore() {
+	public function testUnderscoreLowerUnderscore() {
 
 		assertEqualsCase(coldmvc.string.underscore("foo_bar"), "foo_bar");
 
 	}
 
-	function testUnderscoreUpperHyphen() {
+	public function testUnderscoreUpperHyphen() {
 
 		assertEqualsCase(coldmvc.string.underscore("Foo-Bar"), "foo_bar");
 
 	}
 
-	function testUnderscoreLowerHyphen() {
+	public function testUnderscoreLowerHyphen() {
 
 		assertEqualsCase(coldmvc.string.underscore("foo-bar"), "foo_bar");
 
 	}
 
-	function testUnderscoreUpperPhrase() {
+	public function testUnderscoreUpperPhrase() {
 
 		assertEqualsCase(coldmvc.string.underscore("Foo Of Bar"), "foo_of_bar");
 
 	}
 
-	function testUnderscoreLowerPhrase() {
+	public function testUnderscoreLowerPhrase() {
 
 		assertEqualsCase(coldmvc.string.underscore("foo of bar"), "foo_of_bar");
 
 	}
 
-	function testUncamelizeSingleWord() {
+	public function testUncamelizeSingleWord() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("foo"), "Foo");
 
 	}
 
-	function testUncamelizePascalCase() {
+	public function testUncamelizePascalCase() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("FooBar"), "Foo bar");
 
 	}
 
-	function testUncamelizeCamelCase() {
+	public function testUncamelizeCamelCase() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("fooBar"), "Foo bar");
 
 	}
 
-	function testUncamelizeUpperUncamelize() {
+	public function testUncamelizeUpperUncamelize() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("Foo_Bar"), "Foo bar");
 
 	}
 
-	function testUncamelizeLowerUncamelize() {
+	public function testUncamelizeLowerUncamelize() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("foo_bar"), "Foo bar");
 
 	}
 
-	function testUncamelizeUpperHyphen() {
+	public function testUncamelizeUpperHyphen() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("Foo-Bar"), "Foo bar");
 
 	}
 
-	function testUncamelizeLowerHyphen() {
+	public function testUncamelizeLowerHyphen() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("foo-bar"), "Foo bar");
 
 	}
 
-	function testUncamelizeUpperPhrase() {
+	public function testUncamelizeUpperPhrase() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("Foo Of Bar"), "Foo of bar");
 
 	}
 
-	function testUncamelizeLowerPhrase() {
+	public function testUncamelizeLowerPhrase() {
 
 		assertEqualsCase(coldmvc.string.uncamelize("foo of bar"), "Foo of bar");
+
+	}
+
+	public function testPropercaseSingleWord() {
+
+		assertEqualsCase(coldmvc.string.propercase("foo"), "Foo");
+
+	}
+
+	public function testPropercaseCamelCase() {
+
+		assertEqualsCase(coldmvc.string.propercase("fooBar"), "Foo Bar");
+
+	}
+
+	public function testPropercasePascalCase() {
+
+		assertEqualsCase(coldmvc.string.propercase("FooBar"), "Foo Bar");
+
+	}
+
+	public function testPropercaseUnderscore() {
+
+		assertEqualsCase(coldmvc.string.propercase("foo_bar"), "Foo Bar");
+
+	}
+
+	public function testPropercaseHyphen() {
+
+		assertEqualsCase(coldmvc.string.propercase("foo-bar"), "Foo Bar");
+
+	}
+
+	public function testPropercasePhrase() {
+
+		assertEqualsCase(coldmvc.string.propercase("foo of bar"), "Foo of Bar");
+
+	}
+
+	public function testSingularOrPluralOne() {
+
+		assertEqualsCase(coldmvc.string.singularOrPlural(1, "foo", "bar", "baz"), "foo");
+
+	}
+
+	public function testSingularOrPluralThree() {
+
+		assertEqualsCase(coldmvc.string.singularOrPlural(3, "foo", "bar", "baz"), "bar");
+
+	}
+
+	public function testSingularOrPluralZero() {
+
+		assertEqualsCase(coldmvc.string.singularOrPlural(0, "foo", "bar", "baz"), "baz");
+
+	}
+
+	public function testSingularOrPluralZeroDefault() {
+
+		assertEqualsCase(coldmvc.string.singularOrPlural(0, "foo", "bar"), "bar");
+
+	}
+
+	public function testSingularOrPluralTwoDefault() {
+
+		assertEqualsCase(coldmvc.string.singularOrPlural(3, "product"), "products");
 
 	}
 
