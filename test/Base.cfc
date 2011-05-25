@@ -5,7 +5,8 @@ component {
 
 	private function seed() {
 
-		var cities = _City.count();
+		// var cities = _City.count();
+		var cities = 6;
 
 		if (cities == 0) {
 
@@ -18,6 +19,7 @@ component {
 			var redSox = _Team.findByName("Red Sox").populate({name = "Red Sox", abbreviation = "BOS"});
 			var whiteSox = _Team.findByName("White Sox").populate({name = "White Sox", abbreviation = "CHW"});
 			var yankees = _Team.findByName("Yankees").populate({name = "Yankees", abbreviation = "NYY"});
+			var rockies = _Team.findByName("Rockies").populate({name = "Rockies", abbreviation = "COL"});
 
 			var joeGirardi = _Manager.findWhere({firstName = "Joe", lastName = "Girardi"}).populate({firstName = "Joe", lastName = "Girardi"});
 			var mikeQuade = _Manager.findWhere({firstName = "Mike", lastName = "Quade"}).populate({firstName = "Mike", lastName = "Quade"});
@@ -82,6 +84,7 @@ component {
 			redSox.save(false);
 			whiteSox.save(false);
 			yankees.save(false);
+			rockies.save(false);
 
 			boston.save(false);
 			chicago.save(false);

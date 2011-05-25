@@ -100,6 +100,342 @@ component {
 
 	}
 
+	public function testQueryInList() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("name", "Red Sox, Cubs")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) in (:name)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 2);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Red Sox");
+
+	}
+
+	public function testQueryInArray() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("name", ["Red Sox", "Cubs"])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) in (:name)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 2);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Red Sox");
+
+	}
+
+	public function testQueryIDInList() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("id", "3,1")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.id) in (:id)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 2);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Red Sox");
+
+	}
+
+	public function testQueryIDInArray() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("id", [ 3, 1 ])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.id) in (:id)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 2);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Red Sox");
+
+	}
+
+	public function testQueryNotInList() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("name", "Red Sox, Cubs")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) not in (:name)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 4);
+		assertEqualsCase(teams[1].prop("name"), "Mets");
+		assertEqualsCase(teams[2].prop("name"), "White Sox");
+		assertEqualsCase(teams[3].prop("name"), "Yankees");
+		assertEqualsCase(teams[4].prop("name"), "Rockies");
+
+	}
+
+	public function testQueryNotInArray() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("name", ["Red Sox", "Cubs"])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) not in (:name)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 4);
+		assertEqualsCase(teams[1].prop("name"), "Mets");
+		assertEqualsCase(teams[2].prop("name"), "White Sox");
+		assertEqualsCase(teams[3].prop("name"), "Yankees");
+		assertEqualsCase(teams[4].prop("name"), "Rockies");
+
+	}
+
+	public function testQueryIDNotInList() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("id", "3,1")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.id) not in (:id)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 4);
+		assertEqualsCase(teams[1].prop("name"), "Mets");
+		assertEqualsCase(teams[2].prop("name"), "White Sox");
+		assertEqualsCase(teams[3].prop("name"), "Yankees");
+		assertEqualsCase(teams[4].prop("name"), "Rockies");
+
+	}
+
+	public function testQueryIDNotInArray() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("id", [ 3, 1 ])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.id) not in (:id)");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 4);
+		assertEqualsCase(teams[1].prop("name"), "Mets");
+		assertEqualsCase(teams[2].prop("name"), "White Sox");
+		assertEqualsCase(teams[3].prop("name"), "Yankees");
+		assertEqualsCase(teams[4].prop("name"), "Rockies");
+
+	}
+
+	public function testQueryInListEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("name", "")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 0");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testQueryInArrayEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("name", [""])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 0");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testQueryIDInListEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("id", "")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 0");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testQueryIDInArrayEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.in("id", [])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 0");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testQueryNotInListEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("name", "")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 1");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 6);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Mets");
+		assertEqualsCase(teams[3].prop("name"), "Red Sox");
+		assertEqualsCase(teams[4].prop("name"), "White Sox");
+		assertEqualsCase(teams[5].prop("name"), "Yankees");
+		assertEqualsCase(teams[6].prop("name"), "Rockies");
+
+	}
+
+	public function testQueryNotInArrayEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("name", [""])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 1");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 6);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Mets");
+		assertEqualsCase(teams[3].prop("name"), "Red Sox");
+		assertEqualsCase(teams[4].prop("name"), "White Sox");
+		assertEqualsCase(teams[5].prop("name"), "Yankees");
+		assertEqualsCase(teams[6].prop("name"), "Rockies");
+
+	}
+
+	public function testQueryIDNotInListEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("id", "")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 1");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 6);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Mets");
+		assertEqualsCase(teams[3].prop("name"), "Red Sox");
+		assertEqualsCase(teams[4].prop("name"), "White Sox");
+		assertEqualsCase(teams[5].prop("name"), "Yankees");
+		assertEqualsCase(teams[6].prop("name"), "Rockies");
+
+	}
+
+	public function testQueryIDNotInArrayEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.notIn("id", [])
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where 1 = 1");
+
+		var teams = q.list();
+
+		assertEquals(arrayLen(teams), 6);
+		assertEqualsCase(teams[1].prop("name"), "Cubs");
+		assertEqualsCase(teams[2].prop("name"), "Mets");
+		assertEqualsCase(teams[3].prop("name"), "Red Sox");
+		assertEqualsCase(teams[4].prop("name"), "White Sox");
+		assertEqualsCase(teams[5].prop("name"), "Yankees");
+		assertEqualsCase(teams[6].prop("name"), "Rockies");
+
+	}
+
 	public function testQueryAndSimple() {
 
 		var q = _Team.createQuery();
@@ -403,6 +739,118 @@ component {
 		assertEqualsCase(teams[1].name(), "Cubs");
 		assertEqualsCase(teams[2].name(), "Mets");
 		assertEqualsCase(teams[3].name(), "Red Sox");
+
+	}
+
+	public function testQueryWhereArray() {
+
+		var q = _Team.createQuery();
+
+		var clauses = [];
+		arrayAppend(clauses, q.eq("name", "Red Sox"));
+		arrayAppend(clauses, q.eq("abbreviation", "BOS"));
+
+		q.where(clauses);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name and lower(team.abbreviation) = :abbreviation");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+
+	public function testQueryAndWhereArray() {
+
+		var q = _Team.createQuery();
+
+		q.where(q.eq("name", "Red Sox"));
+
+		var clauses = [];
+		arrayAppend(clauses, q.eq("abbreviation", "BOS"));
+		arrayAppend(clauses, q.like("name", "Red"));
+
+		q.andWhere(clauses);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name and lower(team.abbreviation) = :abbreviation and lower(team.name) like :name_2");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+
+	public function testQueryOrWhereArray() {
+
+		var q = _Team.createQuery();
+
+		q.where(q.eq("name", "Red Sox"));
+
+		var clauses = [];
+		arrayAppend(clauses, q.eq("abbreviation", "BOS"));
+		arrayAppend(clauses, q.like("name", "Red"));
+
+		q.orWhere(clauses);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name or lower(team.abbreviation) = :abbreviation or lower(team.name) like :name_2");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+
+	public function testQueryAndArray() {
+
+		var q = _Team.createQuery();
+
+		var clauses = [];
+		arrayAppend(clauses, q.eq("name", "Red Sox"));
+		arrayAppend(clauses, q.eq("abbreviation", "BOS"));
+
+		q.where(
+			q.and(clauses)
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where ( lower(team.name) = :name and lower(team.abbreviation) = :abbreviation )");
+
+		var team = q.get();
+
+		assertTrue(team.exists());
+		assertEquals(team.id(), 3);
+		assertEqualsCase(team.name(), "Red Sox");
+
+	}
+
+	public function testQueryOrArray() {
+
+		var q = _Team.createQuery();
+
+		var clauses = [];
+		arrayAppend(clauses, q.eq("name", "Red Sox"));
+		arrayAppend(clauses, q.eq("abbreviation", "BOS"));
+
+		q.where(
+			q.or(clauses)
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where ( lower(team.name) = :name or lower(team.abbreviation) = :abbreviation )");
+
+		var team = q.get();
+
+		assertTrue(team.exists());
+		assertEquals(team.id(), 3);
+		assertEqualsCase(team.name(), "Red Sox");
 
 	}
 
