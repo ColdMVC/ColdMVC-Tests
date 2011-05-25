@@ -665,7 +665,6 @@ component {
 		assertEquals(cities[3][1], 3);
 		assertEquals(cities[3][2], 2);
 
-
 	}
 
 	public function testQueryNestedOrs() {
@@ -755,6 +754,63 @@ component {
 		var hql = q.getHQL();
 
 		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name and lower(team.abbreviation) = :abbreviation");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+
+	public function testQueryWhereMultiple() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.eq("name", "Red Sox"),
+			q.eq("abbreviation", "BOS")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name and lower(team.abbreviation) = :abbreviation");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+	
+	public function testQueryAndWhereMultiple() {
+
+		var q = _Team.createQuery();
+
+		q.andWhere(
+			q.eq("name", "Red Sox"),
+			q.eq("abbreviation", "BOS")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name and lower(team.abbreviation) = :abbreviation");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+	
+	public function testQueryOrWhereMultiple() {
+
+		var q = _Team.createQuery();
+
+		q.orWhere(
+			q.eq("name", "Red Sox"),
+			q.eq("abbreviation", "BOS")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name or lower(team.abbreviation) = :abbreviation");
 
 		var teams = q.list();
 
