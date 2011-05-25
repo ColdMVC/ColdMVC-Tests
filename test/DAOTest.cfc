@@ -1821,6 +1821,14 @@ component {
 
 	}
 
+	public function testGetAllEmpty() {
+
+		var teams = _Team.getAll("");
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
 	public function testGetAllWithOptions() {
 
 		var teams = _Team.getAll("3,1,8,2", {
