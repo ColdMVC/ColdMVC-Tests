@@ -761,6 +761,64 @@ component {
 		assertTrue(arrayLen(teams), 1);
 
 	}
+	
+	public function testQueryAndWhereNoWhere() {
+
+		var q = _Team.createQuery();
+
+		q.andWhere(
+			q.eq("name", "Red Sox")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+	
+	public function testQueryAndWhereNoWhereArray() {
+
+		var q = _Team.createQuery();
+		
+		var clauses = [];
+		arrayAppend(clauses, q.eq("name", "Red Sox"));
+		arrayAppend(clauses, q.eq("abbreviation", "BOS"));
+		
+		q.andWhere(clauses);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name and lower(team.abbreviation) = :abbreviation");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 1);
+
+	}
+	
+	public function testQueryOrWhereNoWhereArray() {
+
+		var q = _Team.createQuery();
+
+		var clauses = [];
+		arrayAppend(clauses, q.eq("name", "Red Sox"));
+		arrayAppend(clauses, q.eq("name", "White Sox"));
+
+		q.orWhere(clauses);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name or lower(team.name) = :name_2");
+
+		var teams = q.list();
+
+		assertTrue(arrayLen(teams), 2);
+
+	}
 
 	public function testQueryAndWhereArray() {
 
