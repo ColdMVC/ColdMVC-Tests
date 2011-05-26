@@ -779,7 +779,7 @@ component {
 		assertTrue(arrayLen(teams), 1);
 
 	}
-	
+
 	public function testQueryAndWhereMultiple() {
 
 		var q = _Team.createQuery();
@@ -798,7 +798,7 @@ component {
 		assertTrue(arrayLen(teams), 1);
 
 	}
-	
+
 	public function testQueryOrWhereMultiple() {
 
 		var q = _Team.createQuery();
@@ -817,7 +817,7 @@ component {
 		assertTrue(arrayLen(teams), 1);
 
 	}
-	
+
 	public function testQueryAndWhereNoWhere() {
 
 		var q = _Team.createQuery();
@@ -835,15 +835,15 @@ component {
 		assertTrue(arrayLen(teams), 1);
 
 	}
-	
+
 	public function testQueryAndWhereNoWhereArray() {
 
 		var q = _Team.createQuery();
-		
+
 		var clauses = [];
 		arrayAppend(clauses, q.eq("name", "Red Sox"));
 		arrayAppend(clauses, q.eq("abbreviation", "BOS"));
-		
+
 		q.andWhere(clauses);
 
 		var hql = q.getHQL();
@@ -855,7 +855,7 @@ component {
 		assertTrue(arrayLen(teams), 1);
 
 	}
-	
+
 	public function testQueryOrWhereNoWhereArray() {
 
 		var q = _Team.createQuery();
@@ -1921,6 +1921,263 @@ component {
 		});
 
 		assertEquals(arrayLen(teams), 5);
+
+	}
+
+
+
+
+
+
+
+
+
+
+	public function testFindAllWhereInSimple() {
+
+		var teams = _Team.findAllWhere({
+			id = [ "in", "1, 2" ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereInArray() {
+
+		var teams = _Team.findAllWhere({
+			id = [ "in", [ 1, 2 ] ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereInArrayEmpty() {
+
+		var teams = _Team.findAllWhere({
+			id = [ "in", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testFindAllWhereInSimpleString() {
+
+		var teams = _Team.findAllWhere({
+			name = [ "in", "Red Sox, Yankees" ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereInArrayString() {
+
+		var teams = _Team.findAllWhere({
+			name = [ "in", [ "Red Sox", "Yankees" ] ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereInArrayStringEmpty() {
+
+		var teams = _Team.findAllWhere({
+			name = [ "in", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testFindAllWhereNotInSimple() {
+
+		var teams = _Team.findAllWhere({
+			id = [ "notIn", "1, 2" ]
+		});
+
+		assertEquals(arrayLen(teams), 4);
+
+	}
+
+	public function testFindAllWhereNotInArray() {
+
+		var teams = _Team.findAllWhere({
+			id = [ "notIn", [ 1, 2 ] ]
+		});
+
+		assertEquals(arrayLen(teams), 4);
+
+	}
+
+	public function testFindAllWhereNotInArrayEmpty() {
+
+		var teams = _Team.findAllWhere({
+			id = [ "notIn", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 6);
+
+	}
+
+	public function testFindAllWhereNotInSimpleString() {
+
+		var teams = _Team.findAllWhere({
+			name = [ "notIn", "Red Sox, Yankees" ]
+		});
+
+		assertEquals(arrayLen(teams), 4);
+
+	}
+
+	public function testFindAllWhereNotInArrayString() {
+
+		var teams = _Team.findAllWhere({
+			name = [ "notIn", [ "Red Sox", "Yankees" ] ]
+		});
+
+		assertEquals(arrayLen(teams), 4);
+
+	}
+
+	public function testFindAllWhereNotInArrayStringEmpty() {
+
+		var teams = _Team.findAllWhere({
+			name = [ "notIn", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 6);
+
+	}
+
+
+
+
+
+
+
+
+
+	public function testFindAllWhereInRelationshipSimple() {
+
+		var teams = _Team.findAllWhere({
+			city = [ "in", "1, 2" ]
+		});
+
+		assertEquals(arrayLen(teams), 3);
+
+	}
+
+	public function testFindAllWhereInRelationshipArray() {
+
+		var teams = _Team.findAllWhere({
+			city = [ "in", [ 1, 2 ] ]
+		});
+
+		assertEquals(arrayLen(teams), 3);
+
+	}
+
+	public function testFindAllWhereInRelationshipArrayEmpty() {
+
+		var teams = _Team.findAllWhere({
+			city = [ "in", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testFindAllWhereInRelationshipSimpleString() {
+
+		var teams = _Team.findAllWhere({
+			"city.name" = [ "in", "Boston, New York" ]
+		});
+
+		assertEquals(arrayLen(teams), 3);
+
+	}
+
+	public function testFindAllWhereInRelationshipArrayString() {
+
+		var teams = _Team.findAllWhere({
+			"city.name" = [ "in", [ "Boston", "New York" ] ]
+		});
+
+		assertEquals(arrayLen(teams), 3);
+
+	}
+
+	public function testFindAllWhereInRelationshipArrayStringEmpty() {
+
+		var teams = _Team.findAllWhere({
+			"city.name" = [ "in", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 0);
+
+	}
+
+	public function testFindAllWhereNotInRelationshipSimple() {
+
+		var teams = _Team.findAllWhere({
+			city = [ "notIn", "1, 2" ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereNotInRelationshipArray() {
+
+		var teams = _Team.findAllWhere({
+			city = [ "notIn", [ 1, 2 ] ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereNotInRelationshipArrayEmpty() {
+
+		var teams = _Team.findAllWhere({
+			city = [ "notIn", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 6);
+
+	}
+
+	public function testFindAllWhereNotInRelationshipSimpleString() {
+
+		var teams = _Team.findAllWhere({
+			"city.name" = [ "notIn", "Boston, New York" ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereNotInRelationshipArrayString() {
+
+		var teams = _Team.findAllWhere({
+			"city.name" = [ "notIn", [ "Boston", "New York" ] ]
+		});
+
+		assertEquals(arrayLen(teams), 2);
+
+	}
+
+	public function testFindAllWhereNotInRelationshipArrayStringEmpty() {
+
+		var teams = _Team.findAllWhere({
+			"city.name" = [ "notIn", [] ]
+		});
+
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
