@@ -564,6 +564,28 @@ component {
 
 	}
 
+	public function testQuerySort() {
+
+		var q = _Team.createQuery();
+		q.innerJoin("city");
+		q.sort("city.name desc, team.name");
+		q.order("desc");
+
+		var hql = q.getHQL();
+
+		var teams = q.list();
+
+		assertEqualsCase(hql, "select team from Team as team inner join team.city as city");
+		assertEquals(arrayLen(teams), 5);
+		assertEqualsCase(teams[1].name(), "Yankees");
+		assertEqualsCase(teams[2].name(), "Mets");
+		assertEqualsCase(teams[3].name(), "White Sox");
+		assertEqualsCase(teams[4].name(), "Cubs");
+		assertEqualsCase(teams[5].name(), "Red Sox");
+
+
+	}
+
 	public function testQueryJoin() {
 
 		var q = _Team.createQuery();
@@ -1380,6 +1402,22 @@ component {
 		assertEqualsCase(teams[1].name(), "White Sox");
 		assertEqualsCase(teams[2].name(), "Rockies");
 		assertEqualsCase(teams[3].name(), "Red Sox");
+
+	}
+
+	public function testListSort() {
+
+		var teams = _Team.list({
+			sort = "team.city.name desc, team.name",
+			order = "desc"
+		});
+
+		assertEquals(arrayLen(teams), 5);
+		assertEqualsCase(teams[1].name(), "Yankees");
+		assertEqualsCase(teams[2].name(), "Mets");
+		assertEqualsCase(teams[3].name(), "White Sox");
+		assertEqualsCase(teams[4].name(), "Cubs");
+		assertEqualsCase(teams[5].name(), "Red Sox");
 
 	}
 
