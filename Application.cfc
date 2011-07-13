@@ -20,6 +20,10 @@ component {
 		saveMapping = true
 	};
 
+	this.sessionManagement = true;
+	this.serverSideFormValidation = false;
+	this.sessionTimeout = createTimeSpan(0, 2, 0, 0);
+
 	function onRequestStart() {
 
 		ormReload();

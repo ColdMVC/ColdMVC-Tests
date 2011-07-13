@@ -28,7 +28,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 6);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -45,7 +45,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -62,7 +62,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 2);
+		assertEquals(arrayLen(teams), 2);
 
 	}
 
@@ -79,7 +79,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 2);
+		assertEquals(arrayLen(teams), 2);
 
 	}
 
@@ -96,7 +96,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 6);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -452,7 +452,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -472,7 +472,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 2);
+		assertEquals(arrayLen(teams), 2);
 
 	}
 
@@ -600,7 +600,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -615,7 +615,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 6);
+		assertEquals(arrayLen(teams), 6);
 
 	}
 
@@ -630,7 +630,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 5);
+		assertEquals(arrayLen(teams), 5);
 
 	}
 
@@ -666,7 +666,7 @@ component {
 
 		var cities = q.list();
 
-		assertTrue(arrayLen(cities), 3);
+		assertEquals(arrayLen(cities), 3);
 
 	}
 
@@ -686,7 +686,7 @@ component {
 
 		var cities = q.list();
 
-		assertTrue(arrayLen(cities), 3);
+		assertEquals(arrayLen(cities), 3);
 
 	}
 
@@ -704,7 +704,7 @@ component {
 
 		var cities = q.list();
 
-		assertTrue(arrayLen(cities), 3);
+		assertEquals(arrayLen(cities), 3);
 		assertEquals(cities[1][1], 1);
 		assertEquals(cities[1][2], 1);
 		assertEquals(cities[2][1], 2);
@@ -804,7 +804,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -823,7 +823,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -842,7 +842,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -861,7 +861,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -879,7 +879,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -899,7 +899,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -919,7 +919,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 2);
+		assertEquals(arrayLen(teams), 2);
 
 	}
 
@@ -941,7 +941,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
@@ -963,7 +963,7 @@ component {
 
 		var teams = q.list();
 
-		assertTrue(arrayLen(teams), 1);
+		assertEquals(arrayLen(teams), 1);
 
 	}
 
