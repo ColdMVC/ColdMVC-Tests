@@ -1,3 +1,3 @@
-<cfset test = "app.helpers.LinkTest" />
+<cfset test = "DAOTest" />
 
 <cfinclude template="run.cfm" />

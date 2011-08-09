@@ -666,7 +666,7 @@ component {
 
 		var cities = q.list();
 
-		assertEquals(arrayLen(cities), 3);
+		assertEquals(arrayLen(cities), 5);
 
 	}
 
@@ -682,11 +682,11 @@ component {
 
 		var count = q.count();
 
-		assertTrue(count, 3);
+		assertTrue(count, 5);
 
 		var cities = q.list();
 
-		assertEquals(arrayLen(cities), 3);
+		assertEquals(arrayLen(cities), 5);
 
 	}
 
@@ -1353,6 +1353,52 @@ component {
 		var city = _City.get(1);
 
 		assertEqualsCase(city.name(), "Boston");
+
+	}
+
+	public function testGetWithPopulate() {
+
+		var city = _City.get(1, {
+			name = "Foo"
+		});
+
+		assertEqualsCase(city.name(), "Foo");
+
+		// reset it for future gets
+		city.name("Boston");
+
+	}
+
+	public function testGetWithStructValid() {
+
+		var data = {
+			id = 1,
+			name = "Foo"
+		};
+
+		var city = _City.get(data);
+
+		assertTrue(city.exists());
+		assertEquals(city.id(), 1);
+		assertEqualsCase(city.name(), "Foo");
+
+		// reset it for future gets
+		city.name("Boston");
+
+	}
+
+	public function testGetWithStructInvalid() {
+
+		var data = {
+			id = "",
+			name = "Foo"
+		};
+
+		var city = _City.get(data);
+
+		assertFalse(city.exists());
+		assertEquals(city.id(), "");
+		assertEqualsCase(city.name(), "Foo");
 
 	}
 
