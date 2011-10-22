@@ -1,6 +1,11 @@
-Unit tests for ColdMVC, a convention based MVC framework for ColdFusion 9 loosely based on concepts from Ruby on Rails and Grails.
+Unit tests for ColdMVC
 
-Copyright 2010 Tony Nelson
+https://github.com/tonynelson19/ColdMVC
+
+Copyright and License
+---------------------
+
+Copyright 2011 Tony Nelson
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

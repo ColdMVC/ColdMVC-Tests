@@ -1,0 +1,59 @@
+<pages>
+	<page>
+		<label>Home</label>
+	</page>
+	<page>
+		<label>Download</label>
+		<action>download</action>
+	</page>
+	<page>
+		<label>Quick Start</label>
+		<action>quickstart</action>
+	</page>
+	<page>
+		<label>Documentation</label>
+		<action>documentation</action>
+		<pages>
+			<page>
+				<label>Annotations</label>
+				<controller>annotation</controller>
+				<action>documentation</action>
+			</page>
+			<page>
+				<label>Reference Guide</label>
+				<controller>chapter</controller>
+			</page>
+			<page>
+				<label>Annotations</label>
+				<controller>annotation</controller>
+			</page>
+			<page>
+				<label>Helpers</label>
+				<controller>helper</controller>
+			</page>
+			<page>
+				<label>Tags</label>
+				<controller>tag</controller>
+			</page>
+		</pages>
+	</page>
+	<page>
+		<label>Plugins</label>
+		<controller>plugin</controller>
+		<pages>
+			<page>
+				<label>Submit a Plugin</label>
+				<controller>plugin</controller>
+				<action>submit</action>
+			</page>
+		</pages>
+	</page>
+	<page>
+		<label>Discussion</label>
+		<controller>discussion</controller>
+	</page>
+	<page>
+		<label>Contact</label>
+		<action>contact</action>
+	</page>
+</pages>

@@ -5,6 +5,7 @@ component {
 
 	public void function preLoad(any entity) {
 
+		var coldmvc = getHelpers();
 		coldmvc.factory.autowire(arguments.entity);
 
 	}
@@ -33,6 +34,12 @@ component {
 	}
 
 	public void function postDelete(any entity) {
+
+	}
+
+	private struct function getHelpers() {
+
+		return application.coldmvc.framework.getBean("helperManager").getHelpers();
 
 	}
 

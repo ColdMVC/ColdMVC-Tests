@@ -5,8 +5,8 @@ component {
 
 	function beforeTests() {
 
-		filePath = expandPath("/config/config.ini");
-		ini = new coldmvc.app.util.Ini(filePath);
+		filePath = expandPath("/test/config/config.ini");
+		ini = new coldmvc.config.Ini(filePath);
 
 	}
 

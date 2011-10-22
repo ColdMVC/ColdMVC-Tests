@@ -1,4 +1,18 @@
-<cfif structKeyExists(variables, "test") and variables.test neq "">
+<cfparam name="directory" default="false" />
+
+<cfif directory>
+
+	<cfset runner = new mxunit.runner.DirectoryTestSuite() />
+
+	<cfset class = "test.#test#" />
+	<cfset path = replace(class, ".", "/", "all") />
+	<cfset results = runner.run(expandPath("/" & path), class, true) />
+
+	<cfoutput>
+	#results.getHTMLResults()#
+	</cfoutput>
+
+<cfelse>
 
 	<cfset test = createObject("component", "test." & test) />
 
@@ -6,15 +20,4 @@
 	#test.runTestRemote()#
 	</cfoutput>
 
-<cfelse>
-
-	<cfset runner = new mxunit.runner.DirectoryTestSuite() />
-
-	<cfset results = runner.run(directory=expandPath('/test'), recurse=true, componentPath="test") />
-
-	<cfoutput>
-	#results.getHTMLResults()#
-	</cfoutput>
-
 </cfif>
-

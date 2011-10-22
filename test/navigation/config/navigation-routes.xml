@@ -1,0 +1,10 @@
+<pages>
+	<page label="Foo" route="foo" />
+	<page label="Bar" route="bar">
+		<pages>
+			<page label="Qux" route="qux" />
+			<page label="Corge" route="corge" />
+		</pages>
+	</page>
+	<page label="Baz" route="baz" />
+</pages>

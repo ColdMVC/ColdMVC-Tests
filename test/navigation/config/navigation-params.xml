@@ -1,0 +1,29 @@
+<pages>
+	<page label="1">
+		<params foo="bar" boo="baz" />
+	</page>		
+	<page label="2">
+		<params>
+			<param key="foo" value="bar" />
+			<param key="boo" value="baz" />
+		</params>
+	</page>	
+	<page label="3">
+		<params>
+			<param key="foo">bar</param>
+			<param key="boo">baz</param>
+		</params>
+	</page>	
+	<page label="4">
+		<params>
+			<param>
+				<key>foo</key>
+				<value>bar</value>
+			</param>
+			<param>
+				<key>boo</key>
+				<value>baz</value>
+			</param>			
+		</params>
+	</page>		
+</pages>

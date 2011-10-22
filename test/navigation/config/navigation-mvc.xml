@@ -1,0 +1,10 @@
+<pages>
+	<page label="Foo" controller="foo" />
+	<page label="Bar" controller="bar">
+		<pages>
+			<page label="Qux" controller="qux" />
+			<page label="Corge" controller="corge" />
+		</pages>
+	</page>
+	<page label="Baz" controller="baz" />
+</pages>

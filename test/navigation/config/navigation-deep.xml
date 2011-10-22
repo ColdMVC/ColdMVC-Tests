@@ -1,0 +1,32 @@
+<pages>
+	<page label="Home" visible="false" />
+	<page label="Download" action="download" />
+	<page label="Quick Start" action="quickstart" />
+	<page label="Documentation" action="documentation">
+		<pages>
+			<page label="Annotations" controller="annotation" action="documentation" />
+			<page label="Reference Guide" controller="chapter" />
+			<page label="Annotations" controller="annotation" />
+			<page label="Helpers" controller="helper" />
+			<page label="Tags" controller="tag">
+				<pages>
+					<page label="Foo" path="/foo" />
+					<page label="Bar" path="/bar">
+						<pages>
+							<page label="Qux" path="/qux" visible="false" />
+							<page label="Corge" path="/corge" />
+						</pages>
+					</page>
+					<page label="Baz" path="/baz" />
+				</pages>
+			</page>
+		</pages>
+	</page>
+	<page label="Plugins" controller="plugin">
+		<pages>
+			<page label="Submit a Plugin" controller="plugin" action="submit" />
+		</pages>
+	</page>
+	<page label="Discussion" controller="discussion" />
+	<page label="Contact" action="contact" />
+</pages>
