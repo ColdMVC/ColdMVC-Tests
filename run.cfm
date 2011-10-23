@@ -1,6 +1,12 @@
-<cfparam name="directory" default="false" />
+<cfif find("Test", test)>
 
-<cfif directory>
+	<cfset test = createObject("component", "test." & test) />
+
+	<cfoutput>
+	#test.runTestRemote()#
+	</cfoutput>
+
+<cfelse>
 
 	<cfset runner = new mxunit.runner.DirectoryTestSuite() />
 
@@ -10,14 +16,6 @@
 
 	<cfoutput>
 	#results.getHTMLResults()#
-	</cfoutput>
-
-<cfelse>
-
-	<cfset test = createObject("component", "test." & test) />
-
-	<cfoutput>
-	#test.runTestRemote()#
 	</cfoutput>
 
 </cfif>
