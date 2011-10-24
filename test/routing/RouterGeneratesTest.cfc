@@ -74,24 +74,94 @@ component {
 
 		var router = getDefaultRouter();
 
-		assertRouterGenerates(router, "/", { });
-		assertRouterGenerates(router, "/", { controller = "index" });
-		assertRouterGenerates(router, "/", { controller = "index", action = "index" });
-		assertRouterGenerates(router, "/index.json", { controller = "index", format = "json" });
-		assertRouterGenerates(router, "/user", { controller = "user" });
-		assertRouterGenerates(router, "/user", { controller = "user", action = "index" });
-		assertRouterGenerates(router, "/user.json", { controller = "user", format = "json" });
-		assertRouterGenerates(router, "/user/list", { controller = "user", action = "list" });
-		assertRouterGenerates(router, "/user/list.json", { controller = "user", action = "list", format="json" });
-		assertRouterGenerates(router, "/user/show/1", { controller = "user", action = "show", id = "1" });
-		assertRouterGenerates(router, "/user/show/1.json", { controller = "user", action = "show", id = "1", format = "json" });
-		assertRouterGenerates(router, "/index/list", { action = "list" });
-		assertRouterGenerates(router, "/index/list.json", { action = "list", format = "json" });
-		assertRouterGenerates(router, "/index/show/1", { action = "show", id = "1" });
-		assertRouterGenerates(router, "/index/show/1.json", { action = "show", id = "1", format = "json" });
-		assertRouterGenerates(router, "/index/index/1", { id = "1" });
-		assertRouterGenerates(router, "/index/index/1.json", { id = "1", format = "json" });
-		assertRouterGenerates(router, "/index.json", { format = "json" });
+		assertRouterGenerates(router, "/", {
+			
+		});
+		
+		assertRouterGenerates(router, "/", { 
+			controller = "index" 
+		});
+		
+		assertRouterGenerates(router, "/", { 
+			controller = "index", 
+			action = "index"
+		});
+		
+		assertRouterGenerates(router, "/index.json", { 
+			controller = "index", 
+			format = "json"
+		});
+		
+		assertRouterGenerates(router, "/user", { 
+			controller = "user" 
+		});
+		
+		assertRouterGenerates(router, "/user", { 
+			controller = "user", 
+			action = "index" 
+		});
+		
+		assertRouterGenerates(router, "/user.json", {
+			controller = "user", 
+			format = "json" 
+		});
+		
+		assertRouterGenerates(router, "/user/list", {
+			controller = "user", 
+			action = "list" 
+		});
+		
+		assertRouterGenerates(router, "/user/list.json", {
+			 controller = "user", 
+			 action = "list", 
+			 format="json" 
+		});
+		
+		assertRouterGenerates(router, "/user/show/1", {
+			controller = "user", 
+			action = "show", 
+			id = "1" 
+		});
+		
+		assertRouterGenerates(router, "/user/show/1.json", { 
+			controller = "user", 
+			action = "show", 
+			id = "1", 
+			format = "json" 
+		});
+		
+		assertRouterGenerates(router, "/index/list", { 
+			action = "list" 
+		});
+		
+		assertRouterGenerates(router, "/index/list.json", { 
+			action = "list", 
+			format = "json" 
+		});
+		
+		assertRouterGenerates(router, "/index/show/1", { 
+			action = "show", 
+			id = "1" 
+		});
+		
+		assertRouterGenerates(router, "/index/show/1.json", { 
+			action = "show", 
+			id = "1", 
+			format = "json" 
+		});
+		
+		assertRouterGenerates(router, "/index/index/1", { 
+			id = "1" 
+		});
+		
+		assertRouterGenerates(router, "/index/index/1.json", { 
+			id = "1", 
+			format = "json" 
+		});
+		
+		assertRouterGenerates(router, "/index.json", { 
+			format = "json" 
+		});	
 
 	}
 
@@ -126,7 +196,9 @@ component {
 			action = "list"
 		});
 
-		assertRouterGenerates(router, "/admin", { controller = "index" });
+		assertRouterGenerates(router, "/admin", { 
+			controller = "index" 
+		});
 
 	}
 
