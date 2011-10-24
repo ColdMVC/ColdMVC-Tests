@@ -30,6 +30,58 @@ component {
 
 	}
 
+	public void function testMenuMinDepth() {
+
+		var requestContext = getRequestContext();
+
+		requestContext.populate({
+			module = "default",
+			controller = "tag",
+			action = "index"
+		});
+
+		var container = getContainer("/test/navigation/config/navigation-deep.xml");
+		var navigation = getNavigation();
+
+		var menu = navigation.renderMenu({
+			navigation = container,
+			minDepth = 2,
+			maxDepth = 2
+		});
+
+		assertStringContainsCountEquals(1, "</ul>", menu);
+		assertStringContainsCountEquals(5, "</li>", menu);
+		assertTrue(findNoCase('href="/annotation/documentation"', menu));
+		assertTrue(findNoCase('href="/chapter"', menu));
+		assertTrue(findNoCase('href="/annotation"', menu));
+		assertTrue(findNoCase('href="/helper"', menu));
+		assertTrue(findNoCase('href="/tag"', menu));
+
+	}
+
+	public void function testMenuMinDepthEmpty() {
+
+		var requestContext = getRequestContext();
+
+		requestContext.populate({
+			module = "default",
+			controller = "index",
+			action = "index"
+		});
+
+		var container = getContainer("/test/navigation/config/navigation-deep.xml");
+		var navigation = getNavigation();
+
+		var menu = navigation.renderMenu({
+			navigation = container,
+			minDepth = 2,
+			maxDepth = 2
+		});
+
+		assertEquals("", menu);
+
+	}
+
 	public void function testBreadcrumbs() {
 
 		var requestContext = getRequestContext();

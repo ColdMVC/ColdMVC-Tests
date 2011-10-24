@@ -2,6 +2,6 @@
 <cfset test = "app.model.routing" />
 --->
 
-<cfset test = "app.controllers.PaginationTest" />
+<cfset test = "navigation.NavigationTest" />
 
 <cfinclude template="run.cfm" />
