@@ -112,9 +112,9 @@ component {
 		});
 		
 		assertRouterGenerates(router, "/user/list.json", {
-			 controller = "user", 
-			 action = "list", 
-			 format="json" 
+			controller = "user", 
+			action = "list", 
+			format="json" 
 		});
 		
 		assertRouterGenerates(router, "/user/show/1", {
