@@ -3,7 +3,7 @@
  */
 component {
 
-	public void function testGenerates() {
+	public void function testGenerate() {
 
 		var route = createRoute("/:controller/:action/:id", {
 			params = {
@@ -11,7 +11,7 @@ component {
 			}
 		});
 
-		assertRouteAssembles(route, "/user/edit/1", {
+		assertRouteGeneratesPath(route, "/user/edit/1", {
 			module = "default",
 			controller = "user",
 			action = "edit",
@@ -24,7 +24,7 @@ component {
 
 		var route = createRoute("/admin/:controller/do/:action/:id");
 
-		assertRouteAssembles(route, "/admin/user/do/show/1", {
+		assertRouteGeneratesPath(route, "/admin/user/do/show/1", {
 			controller = "user",
 			action = "show",
 			id = 1
@@ -36,7 +36,7 @@ component {
 
 		var route = createRoute("/:controller/:action/:id");
 
-		assertRouteAssembles(route, "/user/show/1.json", {
+		assertRouteGeneratesPath(route, "/user/show/1.json", {
 			controller = "user",
 			action = "show",
 			id = 1,
@@ -49,7 +49,7 @@ component {
 
 		var route = createRoute("/admin/:controller/do/:action/:id");
 
-		assertRouteAssembles(route, "/admin/user/do/show/1.json", {
+		assertRouteGeneratesPath(route, "/admin/user/do/show/1.json", {
 			controller = "user",
 			action = "show",
 			id = 1,
@@ -62,7 +62,7 @@ component {
 
 		var route = createRoute("/products/*");
 
-		assertRouteAssembles(route, "/products/order/asc/page/2/sort/name", {
+		assertRouteGeneratesPath(route, "/products/order/asc/page/2/sort/name", {
 			page = 2,
 			sort = "name",
 			order = "asc"
@@ -70,9 +70,9 @@ component {
 
 		route = createRoute("/product/list/*");
 
-		assertRouteAssembles(route, "/product/list", { });
+		assertRouteGeneratesPath(route, "/product/list", { });
 
-		assertRouteAssembles(route, "/product/list/category//status/active", {
+		assertRouteGeneratesPath(route, "/product/list/category//status/active", {
 			category = "",
 			status = "active"
 		});
@@ -84,7 +84,7 @@ component {
 			}
 		});
 
-		assertRouteAssembles(route, "/product/list", {
+		assertRouteGeneratesPath(route, "/product/list", {
 			category = "",
 			status = "active"
 		});
@@ -96,7 +96,7 @@ component {
 			}
 		});
 
-		assertRouteAssembles(route, "/product/list/status/active", {
+		assertRouteGeneratesPath(route, "/product/list/status/active", {
 			category = "",
 			status = "active"
 		});
@@ -107,12 +107,12 @@ component {
 
 		var route = createRoute("/:controller/:action/:id?");
 
-		assertRouteAssembles(route, "/user/list", {
+		assertRouteGeneratesPath(route, "/user/list", {
 			controller = "user",
 			action = "list"
 		});
 
-		assertRouteAssembles(route, "/user/list/1", {
+		assertRouteGeneratesPath(route, "/user/list/1", {
 			controller = "user",
 			action = "list",
 			id = 1
@@ -120,13 +120,13 @@ component {
 
 		route = createRoute("/:controller/:action");
 
-		assertRouteAssembles(route, "/user/list.json", {
+		assertRouteGeneratesPath(route, "/user/list.json", {
 			controller = "user",
 			action = "list",
 			format = "json"
 		});
 
-		assertRouteAssembles(route, "/user/list", {
+		assertRouteGeneratesPath(route, "/user/list", {
 			controller = "user",
 			action = "list"
 		});
@@ -137,7 +137,7 @@ component {
 
 		var route = createRoute("/post/:category/:title*");
 
-		assertRouteAssembles(route, "/post/coldmvc/2011/09/30/coldmvc-routing", {
+		assertRouteGeneratesPath(route, "/post/coldmvc/2011/09/30/coldmvc-routing", {
 			category = "coldmvc",
 			title = "2011/09/30/coldmvc-routing"
 		});
@@ -153,7 +153,7 @@ component {
 			}
 		});
 
-		assertRouteAssembles(route, "/product/list/new//page/3/sort/category/status/active", {
+		assertRouteGeneratesPath(route, "/product/list/new//page/3/sort/category/status/active", {
 			page = 3,
 			sort = "category",
 			order = "asc",
@@ -171,11 +171,11 @@ component {
 			}
 		});
 
-		assertRouteAssembles(route, "/posts", {
+		assertRouteGeneratesPath(route, "/posts", {
 			page = 1
 		});
 
-		assertRouteAssembles(route, "/posts/3", {
+		assertRouteGeneratesPath(route, "/posts/3", {
 			page = 3
 		});
 
@@ -185,7 +185,7 @@ component {
 
 		var route = createRoute("/:controller/:action");
 
-		assertRouteAssembles(route, "/user/list?boo=baz&foo=bar", {
+		assertRouteGeneratesPath(route, "/user/list?boo=baz&foo=bar", {
 			controller = "user",
 			action = "list",
 			foo = "bar",
@@ -198,7 +198,7 @@ component {
 
 		var route = createRoute("/:controller/:action/*");
 
-		assertRouteAssembles(route, "/user/list/boo/baz/foo/bar", {
+		assertRouteGeneratesPath(route, "/user/list/boo/baz/foo/bar", {
 			controller = "user",
 			action = "list",
 			foo = "bar",
@@ -216,7 +216,7 @@ component {
 			}
 		});
 
-		assertRouteAssembles(route, "/post/this-is-a-test", {
+		assertRouteGeneratesPath(route, "/post/this-is-a-test", {
 			controller = "blog",
 			action = "show",
 			id = "this-is-a-test"

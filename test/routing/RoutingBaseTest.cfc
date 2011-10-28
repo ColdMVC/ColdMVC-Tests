@@ -3,6 +3,15 @@
  */
 component {
 
+	private any function getFramework() {
+		
+		var framework = new test.routing.com.mock.Framework();
+		var beanFactory = new test.routing.com.mock.BeanFactory();
+		framework.setApplication(beanFactory);		
+		return framework;		
+		
+	}
+
 	private any function getRouter(struct routeParams) {
 
 		if (!structKeyExists(arguments, "routeParams")) {
@@ -72,6 +81,7 @@ component {
 		}
 
 		var route = new coldmvc.routing.Route(arguments.pattern, arguments.options);
+		route.setFramework(getFramework());		
 
 		return route;
 
@@ -117,15 +127,15 @@ component {
 
 	}
 
-	private void function assertRouteAssembles(required any route, required string expected, required struct params, struct routeParams, boolean debug=false) {
+	private void function assertRouteGeneratesPath(required any route, required string expected, required struct params, struct routeParams, boolean debug=false) {
 
 		if (!structKeyExists(arguments, "routeParams")) {
 			arguments.routeParams = {};
 		}
 
-		var assembled = arguments.route.assemble(arguments.params, arguments.routeParams);
+		var generated = arguments.route.generate(arguments.params, arguments.routeParams);
 
-		assertEqualsCase(arguments.expected, assembled);
+		assertEqualsCase(arguments.expected, generated);
 
 	}
 
