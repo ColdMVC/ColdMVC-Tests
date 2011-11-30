@@ -1122,6 +1122,20 @@ component {
 
 	}
 
+	public function testQueryFilterNoOperator() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.filter("name", "Red Sox")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name");
+
+	}
+
 	public function testQueryEmptyFilter() {
 
 		var q = _Team.createQuery();
