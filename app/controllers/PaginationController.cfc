@@ -7,9 +7,9 @@ component {
 
 	function placeholder() {
 
-		params.tableSorter = createTableSorter(["firstName", "lastName", "email"]);
+		params.sorter = createSorter(["firstName", "lastName", "email"]);
 
-		var query = _User.createQuery(params.tableSorter.getOptions());
+		var query = _User.createQuery(params.sorter.getOptions());
 
 		params.paginator = createPaginator(query, {
 			max = 5
@@ -19,9 +19,9 @@ component {
 
 	function static() {
 
-		params.tableSorter = createTableSorter(["firstName", "lastName", "email"]);
+		params.sorter = createSorter(["firstName", "lastName", "email"]);
 
-		var query = _User.createQuery(params.tableSorter.getOptions());
+		var query = _User.createQuery(params.sorter.getOptions());
 
 		params.paginator = createPaginator(query, {
 			max = 5
@@ -31,9 +31,9 @@ component {
 
 	function wildcard() {
 
-		params.tableSorter = createTableSorter(["firstName", "lastName", "email"]);
+		params.sorter = createSorter(["firstName", "lastName", "email"]);
 
-		var query = _User.createQuery(params.tableSorter.getOptions());
+		var query = _User.createQuery(params.sorter.getOptions());
 
 		params.paginator = createPaginator(query, {
 			max = 5

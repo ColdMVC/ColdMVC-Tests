@@ -1108,6 +1108,66 @@ component {
 
 	}
 
+	public function testQueryFilter() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.filter("name", "eq", "Red Sox")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name");
+
+	}
+
+	public function testQueryEmptyFilter() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.filter("name", "eq", "")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team");
+
+	}
+
+	public function testQueryMultipleFilters() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.filter("name", "eq", "Red Sox"),
+			q.filter("abbreviation", "eq", "BOS")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.name) = :name and lower(team.abbreviation) = :abbreviation");
+
+	}
+
+
+
+	public function testQueryMultipleFiltersWitEmpty() {
+
+		var q = _Team.createQuery();
+
+		q.where(
+			q.filter("name", "eq", ""),
+			q.filter("abbreviation", "eq", "BOS")
+		);
+
+		var hql = q.getHQL();
+
+		assertEqualsCase(hql, "select team from Team as team where lower(team.abbreviation) = :abbreviation");
+
+	}
+
 	public function testModelMissingMethodSimple() {
 
 		var team = _Team.new();
