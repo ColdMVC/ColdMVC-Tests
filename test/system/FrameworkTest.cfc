@@ -5,7 +5,7 @@ component {
 
 	private any function getFramework() {
 
-		return new coldmvc.system.Framework("E:\workspace\tests\");
+		return new coldmvc.Framework("E:\workspace\tests\", "coldmvc.");
 
 	}
 
