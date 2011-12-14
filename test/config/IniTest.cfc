@@ -3,128 +3,134 @@
  */
 component {
 
-	function beforeTests() {
+	public void function testSectionsIsAStruct() {
 
-		filePath = expandPath("/test/config/config.ini");
-		ini = new coldmvc.config.Ini(filePath);
-
-	}
-
-	public function testSectionsIsAStruct() {
-
+		var ini = getIni("config");
 		var sections = ini.getSections();
 
 		assertIsStruct(sections);
 
 	}
 
-	public function testSectionsHasCorrectKeyCount() {
+	public void function testSectionsHasCorrectKeyCount() {
 
+		var ini = getIni("config");
 		var sections = ini.getSections();
 
-		assertEquals(structCount(sections), 4);
+		assertEquals(4, structCount(sections));
 
 	}
 
-	public function testSimpleSectionIsAStruct() {
+	public void function testSimpleSectionIsAStruct() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("production");
 
 		assertIsStruct(section);
 
 	}
 
-	public function testSimpleSectionHasCorrectKeyCount() {
+	public void function testSimpleSectionHasCorrectKeyCount() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("production");
 
-		assertEquals(structCount(section), 3);
+		assertEquals(3, structCount(section));
 
 	}
 
-	public function testInheritedSectionIsAStruct() {
+	public void function testInheritedSectionIsAStruct() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertIsStruct(section);
 
 	}
 
-	public function testInheritedSectionHasCorrectKeyCount() {
+	public void function testInheritedSectionHasCorrectKeyCount() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
-		assertEquals(structCount(section), 13);
+		assertEquals(13, structCount(section));
 
 	}
 
-	public function testInheritedSectionHasCorrectKeys() {
+	public void function testInheritedSectionHasCorrectKeys() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
-		assertEquals(section["development"], "true");
-		assertEquals(section["environment"], "development");
+		assertEquals("true", section["development"]);
+		assertEquals("development", section["environment"]);
 		assertIsArray(section["array"]);
-		assertTrue(arrayLen(section["array"]), 3);
+		assertEquals(3, arrayLen(section["array"]));
 		assertIsStruct(section["struct"]);
-		assertTrue(structCount(section["struct"]), 2);
-		assertEquals(section["yes"], "true");
+		assertEquals(2, structCount(section["struct"]));
+		assertEquals("true", section["yes"]);
 		assertIsStruct(section["nested"]);
-		assertTrue(structCount(section["nested"]), 3);
-		assertEquals(section["nested.foo"], "1");
-		assertEquals(section["nested.bar"], "2");
+		assertTrue(3, structCount(section["nested"]));
+		assertEquals("1", section["nested.foo"]);
+		assertEquals("2", section["nested.bar"]);
 		assertIsStruct(section["nested.baz"]);
-		assertTrue(structCount(section["nested.baz"]), 1);
-		assertEquals(section["staging"], "true");
-		assertEquals(section["testing"], "true");
-		assertEquals(section["production"], "true");
-		assertEquals(section["foo"], "staging");
+		assertEquals(1, structCount(section["nested.baz"]));
+		assertEquals("true", section["staging"]);
+		assertEquals("true", section["testing"]);
+		assertEquals("true", section["production"]);
+		assertEquals("staging", section["foo"]);
 
 	}
 
-	public function testPartiallyInheritedSectionHasCorrectKeyCount() {
+	public void function testPartiallyInheritedSectionHasCorrectKeyCount() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("testing");
 
-		assertEquals(structCount(section), 5);
+		assertEquals(5, structCount(section));
 
 	}
 
-	public function testNestedPropertyExists() {
+	public void function testNestedPropertyExists() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section, "nested"));
 
 	}
 
-	public function testNestedPropertyIsAStruct() {
+	public void function testNestedPropertyIsAStruct() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertIsStruct(section["nested"]);
 
 	}
 
-	public function testNestedPropertyHasCorrectKeyCount() {
+	public void function testNestedPropertyHasCorrectKeyCount() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
-		assertEquals(structCount(section["nested"]), 3);
+		assertEquals(3, structCount(section["nested"]));
 
 	}
 
-	public function testNestedPropertyHasCorrectKeyValues() {
+	public void function testNestedPropertyHasCorrectKeyValues() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
-		assertEquals(section["nested"]["foo"], "1");
-		assertEquals(section["nested"]["bar"], "2");
+		assertEquals("1", section["nested"]["foo"]);
+		assertEquals("2", section["nested"]["bar"]);
 
 	}
 
-	public function testNestedPropertyHasCorrectKeys() {
+	public void function testNestedPropertyHasCorrectKeys() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section["nested"], "foo"));
@@ -132,8 +138,9 @@ component {
 
 	}
 
-	public function testNestedPropertyStillExists() {
+	public void function testNestedPropertyStillExists() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section, "nested.foo"));
@@ -141,32 +148,36 @@ component {
 
 	}
 
-	public function testJSONStructExists() {
+	public void function testJSONStructExists() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section, "struct"));
 
 	}
 
-	public function testJSONStructIsAStruct() {
+	public void function testJSONStructIsAStruct() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertIsStruct(section["struct"]);
 
 	}
 
-	public function testJSONStructHasCorrectKeyCount() {
+	public void function testJSONStructHasCorrectKeyCount() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
-		assertEquals(structCount(section["struct"]), 2);
+		assertEquals(2, structCount(section["struct"]));
 
 	}
 
-	public function testJSONStructHasCorrectKeys() {
+	public void function testJSONStructHasCorrectKeys() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section["struct"], "1"));
@@ -174,8 +185,9 @@ component {
 
 	}
 
-	public function testJSONStructHasCorrectKeyValues() {
+	public void function testJSONStructHasCorrectKeyValues() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertEquals(section["struct"]["1"], "yes");
@@ -183,59 +195,97 @@ component {
 
 	}
 
-	public function testJSONArrayExists() {
+	public void function testJSONArrayExists() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section, "array"));
 
 	}
 
-	public function testJSONArrayIsAnArray() {
+	public void function testJSONArrayIsAnArray() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertIsArray(section["array"]);
 
 	}
 
-	public function testJSONStringIsABoolean() {
+	public void function testJSONStringIsABoolean() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertEquals(section["yes"], "true");
 
 	}
 
-	public function testInheritedValueExists() {
+	public void function testInheritedValueExists() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section, "production"));
 
 	}
 
-	public function testInheritedValueIsCorrect() {
+	public void function testInheritedValueIsCorrect() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
-		assertEquals(section["production"], "true");
+		assertEquals("true", section["production"]);
 
 	}
 
-	public function testOverriddenValueExists() {
+	public void function testOverriddenValueExists() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
 		assertTrue(structKeyExists(section, "environment"));
 
 	}
 
-	public function testOverriddenValueIsCorrect() {
+	public void function testOverriddenValueIsCorrect() {
 
+		var ini = getIni("config");
 		var section = ini.getSection("development");
 
-		assertEquals(section["environment"], "development");
+		assertEquals("development", section["environment"]);
+
+	}
+
+	public void function testSuper() {
+
+		request.debug = true;
+		var ini = getIni("super", "default");
+		var section = ini.getSection("development");
+
+		assertIsStruct(section);
+		assertEquals(5, structCount(section));
+		assertTrue(structKeyExists(section, "foo"));
+		assertIsStruct(section["foo"]);
+		assertTrue(structKeyExists(section["foo"], "default"));
+		assertTrue(structKeyExists(section["foo"], "production"));
+		assertTrue(structKeyExists(section["foo"], "development"));
+		assertEquals("true", section["foo"]["default"]);
+		assertEquals("true", section["foo"]["production"]);
+		assertEquals("true", section["foo"]["development"]);
+		assertTrue(structKeyExists(section, "foo.default"));
+		assertTrue(structKeyExists(section, "foo.production"));
+		assertTrue(structKeyExists(section, "foo.development"));
+		assertEquals("true", section["foo.default"]);
+		assertEquals("true", section["foo.production"]);
+		assertEquals("true", section["foo.development"]);
+
+	}
+
+	private any function getIni(required string name, string super="") {
+
+		return new coldmvc.config.Ini(expandPath("/test/config/#arguments.name#.ini"), arguments.super);
 
 	}
 
