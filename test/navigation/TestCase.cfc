@@ -10,6 +10,7 @@ component {
 		}
 
 		var page = new coldmvc.navigation.Page(arguments.data);
+		page.setControllerManager(getControllerManager());
 		page.setRouter(getRouter());
 		page.setRequestManager(getRequestManager());
 
@@ -100,6 +101,40 @@ component {
 		}));
 
 		return router;
+
+	}
+
+	private any function getControllerManager() {
+
+		if (structKeyExists(variables, "controllerManager")) {
+			return variables.controllerManager;
+		}
+
+		var controllerManager = new coldmvc.system.ControllerManager();
+		var moduleManager = new coldmvc.system.ModuleManager();
+		var fileSystem = new coldmvc.util.FileSystem();
+		var pluginManager = new coldmvc.system.PluginManager(expandPath("/config/plugins.cfm"), fileSystem);
+		var metaDataFlattener = new coldmvc.metadata.MetaDataFlattener();
+		var templateManager = new coldmvc.rendering.TemplateManager();
+		var framework = new coldmvc.Framework(expandPath("/config/../"), "coldmvc.");
+		framework.onApplicationStart();
+
+		var coldmvc = {};
+		coldmvc.string = new coldmvc.app.helpers.String();
+
+		controllerManager.setColdMVC(coldmvc);
+		controllerManager.setFileSystem(fileSystem);
+		controllerManager.setFramework(framework);
+		controllerManager.setMetaDataFlattener(metaDataFlattener);
+		controllerManager.setModuleManager(moduleManager);
+		controllerManager.setTemplateManager(templateManager);
+
+		moduleManager.setFileSystem(fileSystem);
+		moduleManager.setPluginManager(pluginManager);
+
+		variables.controllerManager = controllerManager;
+
+		return controllerManager;
 
 	}
 

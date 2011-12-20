@@ -80,15 +80,25 @@ component {
 
 		var page = createPage();
 
-		assertEqualsCase("", page.getResource());
+		assertEqualsCase("Index", page.getResource());
+		assertFalse(page.hasResource());
+
+		assertEqualsCase("index", page.getPermission());
+		assertFalse(page.hasPermission());
 
 		var page = createPage({
-			resource = "user"
+			resource = "user",
+			permission = "add"
 		});
 
 		assertEqualsCase("user", page.getResource());
 		assertEqualsCase("user", page.getAttribute("resource"));
 		assertTrue(page.hasResource());
+
+		assertEqualsCase("add", page.getPermission());
+		assertEqualsCase("add", page.getAttribute("permission"));
+		assertTrue(page.hasPermission());
+
 		assertFalse(page.hasFoo());
 
 	}
