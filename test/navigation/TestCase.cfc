@@ -113,7 +113,7 @@ component {
 		var controllerManager = new coldmvc.system.ControllerManager();
 		var moduleManager = new coldmvc.system.ModuleManager();
 		var fileSystem = new coldmvc.util.FileSystem();
-		var pluginManager = new coldmvc.system.PluginManager(expandPath("/config/plugins.cfm"), fileSystem);
+		var pluginManager = new coldmvc.system.PluginManager("/config/plugins.cfm", fileSystem);
 		var metaDataFlattener = new coldmvc.metadata.MetaDataFlattener();
 		var templateManager = new coldmvc.rendering.TemplateManager();
 		var framework = new coldmvc.Framework(expandPath("/config/../"), "coldmvc.");
