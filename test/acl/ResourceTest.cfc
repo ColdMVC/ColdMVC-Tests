@@ -40,7 +40,13 @@ component {
 
 		var resource = acl.getResource("book");
 		assertTrue(isStruct(resource));
-		assertEquals(3, structCount(resource));
+		assertEquals(4, structCount(resource));
+		assertTrue(structKeyExists(resource, "id"));
+		assertTrue(structKeyExists(resource, "name"));
+		assertTrue(structKeyExists(resource, "value"));
+		assertTrue(structKeyExists(resource, "instance"));
+		assertEquals(resource.id, "book");
+		assertEquals(resource.name, "book");
 
 		assertTrue(structKeyExists(resource, "id"));
 		assertTrue(isSimpleValue(resource.id));

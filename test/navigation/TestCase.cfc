@@ -41,8 +41,12 @@ component {
 		var requestScope = new coldmvc.scopes.RequestScope();
 		navigation.setRequestScope(requestScope);
 
+		var coldmvc = {};
+		coldmvc.struct = new coldmvc.app.helpers.Struct();
+
 		var acl = new coldmvc.acl.ACL();
 		navigation.setACL(acl);
+		navigation.setColdMVC(coldmvc);
 
 		return navigation;
 

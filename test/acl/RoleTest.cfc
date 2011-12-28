@@ -40,7 +40,13 @@ component {
 
 		var role = acl.getRole("admin");
 		assertTrue(isStruct(role));
-		assertEquals(3, structCount(role));
+		assertEquals(4, structCount(role));
+		assertTrue(structKeyExists(role, "id"));
+		assertTrue(structKeyExists(role, "name"));
+		assertTrue(structKeyExists(role, "value"));
+		assertTrue(structKeyExists(role, "instance"));
+		assertEquals(role.id, "admin");
+		assertEquals(role.name, "admin");
 
 		assertTrue(structKeyExists(role, "id"));
 		assertTrue(isSimpleValue(role.id));
